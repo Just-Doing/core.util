@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// 正则操作
     /// </summary>

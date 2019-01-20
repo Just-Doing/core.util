@@ -3797,11 +3797,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\git\\nicol-util\\core.util\\util.core\\util.core.csproj",
+      "projectUniqueName": "E:\\git\\nicol-util\\util.core\\util.core.csproj",
       "projectName": "util.core",
-      "projectPath": "E:\\git\\nicol-util\\core.util\\util.core\\util.core.csproj",
+      "projectPath": "E:\\git\\nicol-util\\util.core\\util.core.csproj",
       "packagesPath": "C:\\Users\\Nicol\\.nuget\\packages\\",
-      "outputPath": "E:\\git\\nicol-util\\core.util\\util.core\\obj\\",
+      "outputPath": "E:\\git\\nicol-util\\util.core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

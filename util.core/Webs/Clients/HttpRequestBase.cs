@@ -7,7 +7,8 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using Util.Helpers;
+using util.core;
+using util.core.Helpers;
 
 namespace Util.Webs.Clients {
     /// <summary>

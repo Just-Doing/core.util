@@ -5,7 +5,8 @@ using AspectCore.DynamicProxy.Parameters;
 using AspectCore.Extensions.AspectScope;
 using AspectCore.Extensions.Autofac;
 using Autofac;
-using Util.Helpers;
+using util.core;
+using util.core.Helpers;
 
 namespace Util.Dependency {
     /// <summary>

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http.Internal;
 using Util.Security.Principals;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// Web操作
     /// </summary>

@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// 反射操作
     /// </summary>
@@ -107,7 +107,7 @@ namespace Util.Helpers {
         /// <param name="type">类型</param>
         /// <param name="parameters">传递给构造函数的参数</param>        
         public static T CreateInstance<T>( Type type, params object[] parameters ) {
-            return Util.Helpers.Convert.To<T>( Activator.CreateInstance( type, parameters ) );
+            return util.core.Helpers.Convert.To<T>( Activator.CreateInstance( type, parameters ) );
         }
 
         /// <summary>

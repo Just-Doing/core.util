@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// 常用公共操作
     /// </summary>

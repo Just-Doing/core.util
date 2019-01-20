@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Util {
+namespace util.core
+{
     /// <summary>
     /// 系统扩展 - 验证
     /// </summary>

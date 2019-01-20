@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// Xml操作 - 工具
     /// </summary>

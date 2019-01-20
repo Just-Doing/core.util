@@ -1,8 +1,10 @@
-/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: "Chinese Quote",-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 
 /* Wrapping element */
@@ -34,4 +36,25 @@ body {
     .carousel-caption {
         display: none;
     }
+}
+
+#home .container {
+    margin: 0;
+    padding: 20px;
+    width: 100%;
+}
+
+ul {
+    padding:0;margin :0;
+}
+    ul li {
+        list-style:none;
+        padding-left:10px;
+    }
+.mao {
+    position: relative;
+    top: -50px;
+    display: block;
+    height: 0;
+    overflow: hidden;
 }

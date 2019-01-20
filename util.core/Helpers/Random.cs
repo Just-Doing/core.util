@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// 随机数操作
     /// </summary>

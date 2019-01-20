@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Util.Dependency;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// 容器
     /// </summary>

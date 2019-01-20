@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// Json操作
     /// </summary>

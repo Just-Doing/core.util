@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// 时间操作
     /// </summary>
@@ -23,7 +23,7 @@ namespace Util.Helpers {
         /// </summary>
         /// <param name="dateTime">时间</param>
         public static void SetTime( string dateTime ) {
-            _dateTime = Util.Helpers.Convert.ToDateOrNull( dateTime );
+            _dateTime = util.core.Helpers.Convert.ToDateOrNull( dateTime );
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Util.Helpers {
         public static long GetUnixTimestamp( DateTime time ) {
             var start = TimeZoneInfo.ConvertTime( new DateTime( 1970, 1, 1 ), TimeZoneInfo.Local );
             long ticks = ( time - start.Add( new TimeSpan( 8, 0, 0 ) ) ).Ticks;
-            return Util.Helpers.Convert.ToLong( ticks / TimeSpan.TicksPerSecond );
+            return util.core.Helpers.Convert.ToLong( ticks / TimeSpan.TicksPerSecond );
         }
 
         /// <summary>

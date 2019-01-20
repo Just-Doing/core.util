@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// Url操作
     /// </summary>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// 线程操作
     /// </summary>

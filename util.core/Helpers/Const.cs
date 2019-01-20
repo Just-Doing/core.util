@@ -1,4 +1,4 @@
-﻿namespace Util.Helpers {
+﻿namespace util.core.Helpers {
     /// <summary>
     /// 常量
     /// </summary>

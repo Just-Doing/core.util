@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace Util {
+namespace util.core
+{
     /// <summary>
     /// 系统扩展 - 公共
     /// </summary>
@@ -18,7 +19,7 @@ namespace Util {
         /// </summary>
         /// <param name="instance">枚举实例</param>
         public static int Value( this System.Enum instance ) {
-            return Util.Helpers.Enum.GetValue( instance.GetType(), instance );
+            return util.core.Helpers.Enum.GetValue( instance.GetType(), instance );
         }
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace Util {
         /// <typeparam name="TResult">返回值类型</typeparam>
         /// <param name="instance">枚举实例</param>
         public static TResult Value<TResult>( this System.Enum instance ) {
-            return Util.Helpers.Convert.To<TResult>( Value( instance ) );
+            return util.core.Helpers.Convert.To<TResult>( Value( instance ) );
         }
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace Util {
         /// </summary>
         /// <param name="instance">枚举实例</param>
         public static string Description( this System.Enum instance ) {
-            return Util.Helpers.Enum.GetDescription( instance.GetType(), instance );
+            return util.core.Helpers.Enum.GetDescription( instance.GetType(), instance );
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace Util {
         /// <param name="quotes">引号，默认不带引号，范例：单引号 "'"</param>
         /// <param name="separator">分隔符，默认使用逗号分隔</param>
         public static string Join<T>( this IEnumerable<T> list, string quotes = "", string separator = "," ) {
-            return Util.Helpers.String.Join( list, quotes, separator );
+            return util.core.Helpers.String.Join( list, quotes, separator );
         }
     }
 }

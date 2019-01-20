@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Util.Helpers {
+namespace util.core.Helpers {
     /// <summary>
     /// 字符串操作 - 工具
     /// </summary>

@@ -4,7 +4,7 @@ using System.Linq;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Util.Helpers;
+using util.core.Helpers;
 
 namespace Util.Dependency {
     /// <summary>
