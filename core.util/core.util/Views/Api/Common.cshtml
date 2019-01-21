@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Util.Core.Helpers.Common";
+}
+<h2>@ViewData["Title"]</h2>
+
+<div class="row" style="">
+    <div class="col-md-6">
+        <dl>
+            <dt>
+                <a name='TGetType' class="mao"></a>
+                < T >  GetType
+            </dt>
+            <dd>
+                para: none
+            </dd>
+            <dd>
+                return: Type
+            </dd>
+            <dd>
+                eg: 
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <a name='GetTypeT' class="mao"></a>
+                GetType(Type t)
+            </dt>
+            <dd>
+                para: none
+            </dd>
+            <dd>
+                return: Type
+            </dd>
+            <dd>
+                eg: Util.Core.Helpers.Common.GetTypeT< string >("test")  == > string
+            </dd>
+        </dl>
+    </div>
+
+    <div class="col-md-6">
+        <dl>
+            <dt>
+                <a name='GetPhysicalPath' class="mao"></a>
+                GetPhysicalPath(string relativePath)
+            </dt>
+            <dd>
+                para: none
+            </dd>
+            <dd>
+                return: string
+            </dd>
+            <dd>
+                eg: Util.Core.Helpers.Common.GetPhysicalPath("test/t.html")  == > c://wwwroot/test/t.html
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <a name='GetWebRootPath' class="mao"></a>
+                GetWebRootPath(string relativePath)
+            </dt>
+            <dd>
+                para: none
+            </dd>
+            <dd>
+                return: string
+            </dd>
+            <dd>
+                eg:Util.Core.Helpers.Common.GetWebRootPath("test/t.html")  == > c://wwwroot/test/t.html
+            </dd>
+        </dl>
+    </div>
+</div>

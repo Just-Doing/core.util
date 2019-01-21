@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Util.Core.Helpers.String";
+}
+<h2>@ViewData["Title"]</h2>
+
+<div class="row" style="">
+    <div class="col-md-6">
+        <dl id="TGetType">
+            <dt>
+                <a name='PinYin' class="mao"></a>
+                PinYin(string chineseText)
+            </dt>
+            <dd>dec: 获取汉字的拼音简码，即首字母缩写,范例：中国,返回zg</dd>
+            <dd>
+                para: string chineseText
+            </dd>
+            <dd>
+                return: string
+            </dd>
+            <dd>
+                eg: Util.Core.Helpers.String.PinYin("中国") = > "zg"
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <a name='Join' class="mao"></a>
+                Join< string >(IEnumerable<T> list, string quotes = "", string separator = "," )
+            </dt>
+            <dd>将集合连接为带分隔符的字符串</dd>
+            <dd>
+                para: IEnumerable<T> list, string quotes = "", string separator = ","
+            </dd>
+            <dd>
+                return: string
+            </dd>
+            <dd>
+                eg: Util.Core.Helpers.Common.Join< string >([a,b,c,d, "'",","])  == > "'a','b','c'"
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <a name='FirstLowerCase' class="mao"></a>
+                FirstLowerCase(string value)
+            </dt>
+            <dd>dec: 首字母小写</dd>
+            <dd>
+                para: string value
+            </dd>
+            <dd>
+                return: string
+            </dd>
+            <dd>
+                eg: Util.Core.Helpers.Common.FirstLowerCase("TEST")  == > "tEST"
+            </dd>
+        </dl>
+    </div>
+
+</div>

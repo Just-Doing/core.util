@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication1</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Core.Util</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>*@
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            <div class="row">
+                <div class="col-md2">
+
+                </div>
+                <div class="col-md10">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <dl>
+                        <dt>Common</dt>
+                        <dd>
+                            <ul>
+                                <li><a href="/Api/Common#TGetType">< T >GetType</a></li>
+                                <li><a href="/Api/Common#GetTypeT">GetType(T t)</a></li>
+                                <li><a href="/Api/Common#GetPhysicalPath">GetPhysicalPath</a></li>
+                                <li><a href="/Api/Common#GetWebRootPath">GetWebRootPath</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>String</dt>
+                        <dd>
+                            <ul>
+                                <li><a href="/Api/String#Join">Join</a></li>
+                                <li><a href="/Api/String#PinYin">PinYin</a></li>
+                                <li><a href="/Api/String#ResolvePinYin">ResolvePinYin</a></li>
+                                <li><a href="/Api/String#ResolveByCode">ResolveByCode</a></li>
+                                <li><a href="/Api/String#ResolveByConst">ResolveByConst</a></li>
+                                <li><a href="/Api/String#FirstLowerCase">FirstLowerCase</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Regex</dt>
+                        <dd>
+                            <ul>
+                                <li><a href="/Api/Regex#GetValuesT">< T >GetValue</a></li>
+                                <li><a href="/Api/Regex#GetValue">GetValue</a></li>
+                                <li><a href="/Api/Regex#Split">Split</a></li>
+                                <li><a href="/Api/Regex#Replace">Replace</a></li>
+                                <li><a href="/Api/Regex#IsMatch">IsMatch</a></li>
+                                <li><a href="/Api/Regex#IsMatch">IsMatch(option)</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Convert</dt>
+                        <dd>
+                            <ul>
+                                <li><a href="/Api/Convert#ToInt">ToInt</a></li>
+                                <li><a href="/Api/Convert#ToIntOrNull">ToIntOrNull</a></li>
+                                <li><a href="/Api/Convert#ToLong">ToLong</a></li>
+                                <li><a href="/Api/Convert#ToLongOrNull">ToLongOrNull</a></li>
+                                <li><a href="/Api/Convert#ToFloat">ToFloat</a></li>
+                                <li><a href="/Api/Convert#ToFloatOrNull">ToFloatOrNull</a></li>
+                                <li><a href="/Api/Convert#ToDouble">ToDouble</a></li>
+                                <li><a href="/Api/Convert#ToDoubleOrNull">ToDoubleOrNull</a></li>
+                                <li><a href="/Api/Convert#ToDecimal">ToDecimal</a></li>
+                                <li><a href="/Api/Convert#ToDecimalOrNull">ToDecimalOrNull</a></li>
+                                <li><a href="/Api/Convert#ToBool">ToBool</a></li>
+                                <li><a href="/Api/Convert#ToBoolOrNull">ToBoolOrNull</a></li>
+                                <li><a href="/Api/Convert#ToDate">ToDate</a></li>
+                                <li><a href="/Api/Convert#ToDateOrNull">ToDateOrNull</a></li>
+                                <li><a href="/Api/Convert#ToGuid">ToGuid</a></li>
+                                <li><a href="/Api/Convert#ToGuidOrNull">ToGuidOrNull</a></li>
+                                <li><a href="/Api/Convert#ToGuidList">ToGuidList</a></li>
+                                <li><a href="/Api/Convert#ToList">ToList</a></li>
+                                <li><a href="/Api/Convert#To">To</a></li>
+                                <li><a href="/Api/Convert#ToBytes">ToBytes</a></li>
+                                <li><a href="/Api/Convert#ToBytes">ToBytes</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>Encrypt</dt>
+                        <dd>
+                            <ul>
+                                <li><a href="/Api/Encrypt#Md5By16">Md5By16</a></li>
+                                <li><a href="/Api/Encrypt#Md5By16">Md5By16</a></li>
+                                <li><a href="/Api/Encrypt#Md5By32">Md5By32</a></li>
+                                <li><a href="/Api/Encrypt#Md5By32">Md5By32</a></li>
+                                <li><a href="/Api/Encrypt#DesEncrypt">DesEncrypt</a></li>
+                                <li><a href="/Api/Encrypt#DesEncrypt">DesEncrypt</a></li>
+                                <li><a href="/Api/Encrypt#DesEncrypt">DesEncrypt</a></li>
+                                <li><a href="/Api/Encrypt#DesDecrypt">DesDecrypt</a></li>
+                                <li><a href="/Api/Encrypt#DesDecrypt">DesDecrypt</a></li>
+                                <li><a href="/Api/Encrypt#DesDecrypt">DesDecrypt</a></li>
+                                <li><a href="/Api/Encrypt#AesEncrypt">AesEncrypt</a></li>
+                                <li><a href="/Api/Encrypt#AesEncrypt">AesEncrypt</a></li>
+                                <li><a href="/Api/Encrypt#AesEncrypt">AesEncrypt</a></li>
+                                <li><a href="/Api/Encrypt#AesDecrypt">AesDecrypt</a></li>
+                                <li><a href="/Api/Encrypt#AesDecrypt">AesDecrypt</a></li>
+                                <li><a href="/Api/Encrypt#AesDecrypt">AesDecrypt</a></li>
+                                <li><a href="/Api/Encrypt#RsaSign">RsaSign</a></li>
+                                <li><a href="/Api/Encrypt#RsaSign">RsaSign</a></li>
+                                <li><a href="/Api/Encrypt#Rsa2Sign">Rsa2Sign</a></li>
+                                <li><a href="/Api/Encrypt#Rsa2Sign">Rsa2Sign</a></li>
+                                <li><a href="/Api/Encrypt#RsaVerify">RsaVerify</a></li>
+                                <li><a href="/Api/Encrypt#RsaVerify">RsaVerify</a></li>
+                                <li><a href="/Api/Encrypt#Rsa2Verify">Rsa2Verify</a></li>
+                                <li><a href="/Api/Encrypt#Rsa2Verify">Rsa2Verify</a></li>
+                                <li><a href="/Api/Encrypt#HmacSha256">HmacSha256</a></li>
+                                <li><a href="/Api/Encrypt#HmacSha256">HmacSha256</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-10">
+                    @RenderBody()
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
