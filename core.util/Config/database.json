@@ -1,0 +1,61 @@
+﻿[
+  {
+    "title": "Common",
+    "content": [
+      {
+        "name": "< T >  GetType",
+        "dec": "获取对象类型",
+        "para": "none",
+        "return": "Type",
+        "eg": ""
+      },
+      {
+        "name": "GetType(Type t)",
+        "dec": "获取对象类型",
+        "para": "none",
+        "return": "Type",
+        "eg": "\"Util.Core.Helpers.Common.GetTypeT(\"test\")  == > string\""
+      },
+      {
+        "name": "GetPhysicalPath(string relativePath)",
+        "dec": "根据相对路径获取物理路径",
+        "para": "string relativePath",
+        "return": "string",
+        "eg": "\"Util.Core.Helpers.Common.GetPhysicalPath(\"test/t.html\")  == > c://wwwroot/test/t.html\""
+      },
+      {
+        "name": "GetWebRootPath(string relativePath)",
+        "dec": "根据相对路径获取站点项目的根路径",
+        "para": "string relativePath",
+        "return": "string",
+        "eg": "\"Util.Core.Helpers.Common.GetWebRootPath(\"test/t.html\")  == > c://wwwroot/test/t.html\""
+      }
+    ]
+  },
+  {
+    "title": "String",
+    "content": [
+      {
+        "name": "PinYin(string chineseText)",
+        "dec": "获取汉字的拼音简码，即首字母缩写,范例：中国,返回zg",
+        "para": "string chineseText",
+        "return": "string",
+        "eg": "Util.Core.Helpers.String.PinYin(中国) = > zg"
+      },
+      {
+        "name": "Join< string >(IEnumerable<T> list, string quotes = \"\", string separator = \",\" )",
+        "dec": "将集合连接为带分隔符的字符串",
+        "para": "IEnumerable<T> list, string quotes = \"\", string separator = \",\"",
+        "return": "string",
+        "eg": "Util.Core.Helpers.Common.Join< string >([a,b,c,d, \"'\",\",\"])  == > \"'a','b','c'\""
+      },
+      {
+        "name": "FirstLowerCase(string value)",
+        "dec": "首字母小写",
+        "para": "string value",
+        "return": "string",
+        "eg": "\"Util.Core.Helpers.Common.FirstLowerCase(\"TEST\")  == > \"tEST\"\""
+      }
+    ]
+  }
+]
