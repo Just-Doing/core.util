@@ -3,22 +3,23 @@
 }
 <h2>@ViewData["Title"]</h2>
 
+<link href="~/css/site.css" rel="stylesheet" />
 <div class="row" style="">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <dl id="TGetType">
             <dt>
                 <a name='PinYin' class="mao"></a>
                 PinYin(string chineseText)
             </dt>
-            <dd>dec: 获取汉字的拼音简码，即首字母缩写,范例：中国,返回zg</dd>
+            <dd><span class="label">dec</span>: 获取汉字的拼音简码，即首字母缩写,范例：中国,返回zg</dd>
             <dd>
-                para: string chineseText
+                <span class="label">para</span>: string chineseText
             </dd>
             <dd>
-                return: string
+                <span class="label">return</span>: string
             </dd>
             <dd>
-                eg: Util.Core.Helpers.String.PinYin("中国") = > "zg"
+                <span class="label">eg</span>: Util.Core.Helpers.String.PinYin("中国") = > "zg"
             </dd>
         </dl>
         <dl>
@@ -26,15 +27,15 @@
                 <a name='Join' class="mao"></a>
                 Join< string >(IEnumerable<T> list, string quotes = "", string separator = "," )
             </dt>
-            <dd>将集合连接为带分隔符的字符串</dd>
+            <dd><span class="label">dec</span>: 将集合连接为带分隔符的字符串</dd>
             <dd>
-                para: IEnumerable<T> list, string quotes = "", string separator = ","
+                <span class="label">para</span>: IEnumerable<T> list, string quotes = "", string separator = ","
             </dd>
             <dd>
-                return: string
+                <span class="label">return</span>: string
             </dd>
             <dd>
-                eg: Util.Core.Helpers.Common.Join< string >([a,b,c,d, "'",","])  == > "'a','b','c'"
+                <span class="label">eg</span>: Util.Core.Helpers.Common.Join< string >([a,b,c,d, "'",","])  == > "'a','b','c'"
             </dd>
         </dl>
         <dl>
@@ -42,15 +43,15 @@
                 <a name='FirstLowerCase' class="mao"></a>
                 FirstLowerCase(string value)
             </dt>
-            <dd>dec: 首字母小写</dd>
+            <dd><span class="label">dec</span>: 首字母小写</dd>
             <dd>
-                para: string value
+                <span class="label">para</span>: string value
             </dd>
             <dd>
-                return: string
+                <span class="label">return</span>: string
             </dd>
             <dd>
-                eg: Util.Core.Helpers.Common.FirstLowerCase("TEST")  == > "tEST"
+                <span class="label">eg</span>: Util.Core.Helpers.Common.FirstLowerCase("TEST")  == > "tEST"
             </dd>
         </dl>
     </div>

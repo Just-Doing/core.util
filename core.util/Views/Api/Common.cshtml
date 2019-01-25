@@ -2,22 +2,22 @@
     ViewData["Title"] = "Util.Core.Helpers.Common";
 }
 <h2>@ViewData["Title"]</h2>
-
+<link href="~/css/site.css" rel="stylesheet" />
 <div class="row" style="">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <dl>
             <dt>
                 <a name='TGetType' class="mao"></a>
                 < T >  GetType
             </dt>
             <dd>
-                para: none
+                <span class="label">para</span>: none
             </dd>
             <dd>
-                return: Type
+                <span class="label">return</span>: Type
             </dd>
             <dd>
-                eg: 
+                <span class="label">eg</span>:
             </dd>
         </dl>
         <dl>
@@ -26,31 +26,28 @@
                 GetType(Type t)
             </dt>
             <dd>
-                para: none
+                <span class="label">para</span>: none
             </dd>
             <dd>
-                return: Type
+                <span class="label">return</span>: Type
             </dd>
             <dd>
-                eg: Util.Core.Helpers.Common.GetTypeT< string >("test")  == > string
+                <span class="label">eg</span>: Util.Core.Helpers.Common.GetTypeT< string >("test")  == > string
             </dd>
         </dl>
-    </div>
-
-    <div class="col-md-6">
         <dl>
             <dt>
                 <a name='GetPhysicalPath' class="mao"></a>
                 GetPhysicalPath(string relativePath)
             </dt>
             <dd>
-                para: none
+                <span class="label">para</span>: none
             </dd>
             <dd>
-                return: string
+                <span class="label">return</span>: string
             </dd>
             <dd>
-                eg: Util.Core.Helpers.Common.GetPhysicalPath("test/t.html")  == > c://wwwroot/test/t.html
+                <span class="label">eg</span>: Util.Core.Helpers.Common.GetPhysicalPath("test/t.html")  == > c://wwwroot/test/t.html
             </dd>
         </dl>
         <dl>
@@ -59,13 +56,13 @@
                 GetWebRootPath(string relativePath)
             </dt>
             <dd>
-                para: none
+                <span class="label">para</span>: none
             </dd>
             <dd>
-                return: string
+                <span class="label">return</span>: string
             </dd>
             <dd>
-                eg:Util.Core.Helpers.Common.GetWebRootPath("test/t.html")  == > c://wwwroot/test/t.html
+                <span class="label">eg</span>: Util.Core.Helpers.Common.GetWebRootPath("test/t.html")  == > c://wwwroot/test/t.html
             </dd>
         </dl>
     </div>

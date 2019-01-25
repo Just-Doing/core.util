@@ -61,3 +61,25 @@ body {
         list-style-type:none;
         margin-left: 10px
     }
+.label {
+    color: gray;
+}
+.left-nav {
+    position: fixed;
+    width: 250px;
+    height: calc(100% - 140px);
+    overflow: auto;
+}
+.right-content {
+    margin-left:252px;
+}
+dl {
+    margin: 10px;
+    padding:10px;
+    background-color: #F6F6F6;
+    border: solid 1px #cbcbcb;
+    border-radius:3px;
+}
+dd {
+    margin-left:10px;
+}
