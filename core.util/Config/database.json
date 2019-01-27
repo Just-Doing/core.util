@@ -3,31 +3,35 @@
     "title": "Common",
     "content": [
       {
-        "name": "< T >  GetType",
+        "nvTitle": "GetType<t>",
+        "name": "GetType< T >",
         "dec": "获取对象类型",
         "para": "none",
-        "return": "Type",
+        "ret": "Type",
         "eg": ""
       },
       {
+        "nvTitle": "GetType",
         "name": "GetType(Type t)",
         "dec": "获取对象类型",
         "para": "none",
-        "return": "Type",
+        "ret": "Type",
         "eg": "\"Util.Core.Helpers.Common.GetTypeT(\"test\")  == > string\""
       },
       {
+        "nvTitle": "GetPhysicalPath",
         "name": "GetPhysicalPath(string relativePath)",
         "dec": "根据相对路径获取物理路径",
         "para": "string relativePath",
-        "return": "string",
+        "ret": "string",
         "eg": "\"Util.Core.Helpers.Common.GetPhysicalPath(\"test/t.html\")  == > c://wwwroot/test/t.html\""
       },
       {
+        "nvTitle": "GetWebRootPath",
         "name": "GetWebRootPath(string relativePath)",
         "dec": "根据相对路径获取站点项目的根路径",
         "para": "string relativePath",
-        "return": "string",
+        "ret": "string",
         "eg": "\"Util.Core.Helpers.Common.GetWebRootPath(\"test/t.html\")  == > c://wwwroot/test/t.html\""
       }
     ]
@@ -36,25 +40,384 @@
     "title": "String",
     "content": [
       {
+        "nvTitle": "PinYin",
         "name": "PinYin(string chineseText)",
         "dec": "获取汉字的拼音简码，即首字母缩写,范例：中国,返回zg",
         "para": "string chineseText",
-        "return": "string",
+        "ret": "string",
         "eg": "Util.Core.Helpers.String.PinYin(中国) = > zg"
       },
       {
+        "nvTitle": "Join",
         "name": "Join< string >(IEnumerable<T> list, string quotes = \"\", string separator = \",\" )",
         "dec": "将集合连接为带分隔符的字符串",
         "para": "IEnumerable<T> list, string quotes = \"\", string separator = \",\"",
-        "return": "string",
+        "ret": "string",
         "eg": "Util.Core.Helpers.Common.Join< string >([a,b,c,d, \"'\",\",\"])  == > \"'a','b','c'\""
       },
       {
+        "nvTitle": "FirstLowerCase",
         "name": "FirstLowerCase(string value)",
         "dec": "首字母小写",
         "para": "string value",
-        "return": "string",
+        "ret": "string",
         "eg": "\"Util.Core.Helpers.Common.FirstLowerCase(\"TEST\")  == > \"tEST\"\""
+      }
+    ]
+  },
+  {
+    "title": "Convert",
+    "content": [
+      {
+        "nvTitle": "ToInt",
+        "name": "ToInt(object input)",
+        "dec": "转换为32位整型",
+        "para": "object input",
+        "ret": "int",
+        "eg": "Util.Core.Helpers.Convert.ToInt(\"1\") = > 1"
+      },
+      {
+        "nvTitle": "ToIntOrNull",
+        "name": "ToIntOrNull(object input)",
+        "dec": "转换为32位整型 如果失败返回null",
+        "para": "object input",
+        "ret": "int?",
+        "eg": "Util.Core.Helpers.Convert.ToIntOrNull(\"a\") => null"
+      },
+      {
+        "nvTitle": "ToLong",
+        "name": "ToLong(object input)",
+        "dec": "转换为64位整型",
+        "para": "object input",
+        "ret": "long",
+        "eg": "\"Util.Core.Helpers.Convert.ToLong(\"1\")  == > \"1.00\"\""
+      },
+      {
+        "nvTitle": "ToLongOrNull",
+        "name": "ToLongOrNull(object input)",
+        "dec": "转换为64位整型 失败时返回null",
+        "para": "object input",
+        "ret": "long?",
+        "eg": "\"Util.Core.Helpers.Convert.ToLongOrNull(\"1a\")  == > null"
+      },
+      {
+        "nvTitle": "ToFloat",
+        "name": "ToFloat(bject input, int? digits = null)",
+        "dec": "转换为32位浮点型,并按指定小数位舍入",
+        "para": "object input, int? digits = null",
+        "ret": "float",
+        "eg": "\"Util.Core.Helpers.Convert.ToFloat(\"1.000000000000000000000001\")"
+      },
+      {
+        "nvTitle": "ToFloatOrNull",
+        "name": "ToFloatOrNull(bject input, int? digits = null)",
+        "dec": "转换为32位浮点型,并按指定小数位舍入, 失败返回null",
+        "para": "object input, int? digits = null",
+        "ret": "float?",
+        "eg": "\"Util.Core.Helpers.Convert.ToFloatOrNull(\"a\") => null"
+      },
+      {
+        "nvTitle": "ToDouble",
+        "name": "ToDouble(bject input, int? digits = null)",
+        "dec": "转换为64位浮点型,并按指定小数位舍入",
+        "para": "object input, int? digits = null",
+        "ret": "double",
+        "eg": "\"Util.Core.Helpers.Convert.ToDouble(\"1.00000000001\")"
+      },
+      {
+        "nvTitle": "ToDoubleOrNull",
+        "name": "ToDoubleOrNull(bject input, int? digits = null)",
+        "dec": "转换为64位浮点型,并按指定小数位舍入 失败时返回null",
+        "para": "object input, int? digits = null",
+        "ret": "double?",
+        "eg": "\"Util.Core.Helpers.Convert.ToDoubleOrNull(\"a\") => null"
+      },
+      {
+        "nvTitle": "ToDecimal",
+        "name": "ToDecimal(object input)",
+        "dec": "转换为128位浮点型,并按指定小数位舍入",
+        "para": "object input, int? digits = null",
+        "ret": "decimal",
+        "eg": "\"Util.Core.Helpers.Convert.ToDecimal(\"1.0000000000000000000000000001\")"
+      },
+      {
+        "nvTitle": "ToDecimalOrNull",
+        "name": "ToDecimalOrNull(object input)",
+        "dec": "转换为128位浮点型,并按指定小数位舍入 失败时返回null",
+        "para": "object input, int? digits = null",
+        "ret": "decimal?",
+        "eg": "\"Util.Core.Helpers.Convert.ToDecimal(\"1.0000000000000000000000000001\")"
+      },
+      {
+        "nvTitle": "ToBool",
+        "name": "ToBool(object input)",
+        "dec": "转换为布尔值",
+        "para": "object input",
+        "ret": "bool",
+        "eg": "\"Util.Core.Helpers.Convert.ToBool(\"1\") => true"
+      },
+      {
+        "nvTitle": "ToBoolOrNull",
+        "name": "ToBoolOrNull(object input)",
+        "dec": "转换为布尔值 失败时返回null",
+        "para": "object input",
+        "ret": "bool?",
+        "eg": "\"Util.Core.Helpers.Convert.ToBoolOrNull(\"a\") => null"
+      },
+      {
+        "nvTitle": "ToDate",
+        "name": "ToDate(object input)",
+        "dec": "转换为日期",
+        "para": "object input",
+        "ret": "DateTime",
+        "eg": "\"Util.Core.Helpers.Convert.ToDate(\"2019-01-01 12:12:12\")"
+      },
+      {
+        "nvTitle": "ToDateOrNull",
+        "name": "ToDateOrNull(object input)",
+        "dec": "转换为日期 失败时返回null",
+        "para": "object input",
+        "ret": "DateTime?",
+        "eg": "\"Util.Core.Helpers.Convert.ToDateOrNull(\"aaa\") => null"
+      },
+      {
+        "nvTitle": "ToGuid",
+        "name": "ToGuid(object input)",
+        "dec": "转换为Guid",
+        "para": "object input",
+        "ret": "Guid",
+        "eg": "\"Util.Core.Helpers.Convert.ToGuid(\"guid..\""
+      },
+      {
+        "nvTitle": "ToGuidList",
+        "name": "ToGuidList(object input)",
+        "dec": "转换为Guid集合 以逗号分隔的Guid集合字符串，范例:83B0233C-A24F-49FD-8083-1337209EBC9A,EAB523C6-2FE7-47BE-89D5-C6D440C3033A",
+        "para": "object input",
+        "ret": "List<Guid>",
+        "eg": "\"\\\"Util.Core.Helpers.Convert.ToGuidList(\"guid1\\\",\\\"guid2\\\"\")"
+      },
+      {
+        "nvTitle": "To<T>",
+        "name": "To<T>(object input)",
+        "dec": "通用泛型转换",
+        "para": "object input",
+        "ret": "T",
+        "eg": "\"\\\"Util.Core.Helpers.Convert.ToList<class>(\"{test:\"test1\"}\")"
+      },
+      {
+        "nvTitle": "ToList<T>",
+        "name": "ToList<T>(object input)",
+        "dec": "泛型集合转换 范例:83B0233C-A24F-49FD-8083-1337209EBC9A,EAB523C6-2FE7-47BE-89D5-C6D440C3033A",
+        "para": "object input",
+        "ret": "List<T>",
+        "eg": "\"\\\"Util.Core.Helpers.Convert.ToList<class>(\"asdasd,asdasd\")"
+      },
+      {
+        "nvTitle": "ToBytes",
+        "name": "ToBytes(object input)",
+        "dec": "转换为字节数组",
+        "para": "object input",
+        "ret": "byte[]",
+        "eg": "\"\\\"Util.Core.Helpers.Convert.ToBytes(\"asd\")"
+      },
+      {
+        "nvTitle": "ToBytes",
+        "name": "ToBytes(object input, Encoding encoding)",
+        "dec": "转换为字节数组",
+        "para": "object input",
+        "ret": "byte[]",
+        "eg": "\"\\\"Util.Core.Helpers.Convert.ToBytes(\"asd\", Encoding.utf8)"
+      }
+    ]
+  },
+  {
+    "title": "Encrypt",
+    "content": [
+      {
+        "nvTitle": "Md5By16",
+        "name": "Md5By16(string input)",
+        "dec": "Md5加密，返回16位结果 默认编码 UTF8",
+        "para": "string input",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.Md5By16(\"test\") = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "Md5By16",
+        "name": "Md5By16(string value, Encoding encoding)",
+        "dec": "Md5加密，返回16位结果 带编码",
+        "para": "string value, Encoding encoding",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.Md5By16(\"test\"， Encoding.utf8) = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "Md5By32",
+        "name": "Md5By32(string value, Encoding encoding=Encoding.utf8)",
+        "dec": "Md5加密，返回32位结果 带编码",
+        "para": "string value, Encoding encoding",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.Md5By32(\"test\"， Encoding.utf8) = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "DesEncrypt",
+        "name": "DesEncrypt(object value, string DesKey)",
+        "dec": "DES加密,24位字符串 DesKey = \"1qaz!QAZ\"",
+        "para": "string value, DesKey=1qaz!QAZ",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.DesEncrypt(\"test\", DesKey = \"1qaz!QAZ\") = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "DesDecrypt",
+        "name": "DesDecrypt(object value, string DesKey)",
+        "dec": "DES解密 DesKey = \"1qaz!QAZ\"",
+        "para": "string value, DesKey=1qaz!QAZ",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.DesDecrypt(\"test\", DesKey = \"1qaz!QAZ\") = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "DesDecrypt-Encoding",
+        "name": "DesDecrypt(object value, string DesKey=1qaz!QAZ, Encoding encoding)",
+        "dec": "DES解密 DesKey = \"1qaz!QAZ\" 带编码格式",
+        "para": "string value, DesKey=1qaz!QAZ， Encoding",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.DesDecrypt(\"test\", DesKey = \"1qaz!QAZ\", Encoding.utf8) = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "AesEncrypt",
+        "name": "AesEncrypt(object value, string AesKey=1qaz!QAZ)",
+        "dec": "AES加密 AesKey = \"1qaz!QAZ\"",
+        "para": "string value, AesKey=1qaz!QAZ",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.AesEncrypt(\"test\", AesKey = \"1qaz!QAZ\") = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "AesEncrypt-Encoding",
+        "name": "AesEncrypt(object value, string DesKey=1qaz!QAZ, Encoding encoding=Encoding.utf8)",
+        "dec": "AES加密 AesKey = \"1qaz!QAZ\" 带编码格式",
+        "para": "string value, AesKey=1qaz!QAZ， Encoding=Encoding.utf8",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.AesEncrypt(\"test\", AesKey = \"1qaz!QAZ\", Encoding.utf8=Encoding.utf8) = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "AesDecrypt",
+        "name": "AesDecrypt(object value, string DesKey=1qaz!QAZ)",
+        "dec": "AES解密 AesKey = \"1qaz!QAZ\" 带编码格式",
+        "para": "string value, AesKey=1qaz!QAZ",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.AesEncrypt(\"test\", AesKey = \"1qaz!QAZ\") = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "AesDecrypt-Encoding",
+        "name": "AesDecrypt(object value, string AesKey=1qaz!QAZ, Encoding encoding=Encoding.utf8)",
+        "dec": "AES解密 AesKey = \"1qaz!QAZ\" 带编码格式",
+        "para": "string value, AesKey=1qaz!QAZ， Encoding=Encoding.utf8",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.AesDecrypt(\"test\", AesKey = \"1qaz!QAZ\", Encoding.utf8=Encoding.utf8) = > xzcasdhytutyut..."
+      },
+      {
+        "nvTitle": "RsaSign",
+        "name": "RsaSign(string value, string key, Encoding encoding=Encoding.utf8)",
+        "dec": "RSA加密，采用 SHA1 算法 默认编码 utf8",
+        "para": "string value, string key, Encoding encoding=Encoding.utf8",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.RsaSign(string value, string key, Encoding encoding=Encoding.utf8)"
+      },
+      {
+        "nvTitle": "Rsa2Sign",
+        "name": "Rsa2Sign(string value, string key, Encoding encoding=Encoding.utf8)",
+        "dec": "RSA加密，采用 SHA256 算法 默认编码 utf8",
+        "para": "string value, string key, Encoding encoding=Encoding.utf8",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.Rsa2Sign(string value, string key, Encoding encoding=Encoding.utf8)"
+      },
+      {
+        "nvTitle": "RsaVerify",
+        "name": "RsaVerify(string value, string publicKey, string sign, Encoding encoding=Encoding.utf8)",
+        "dec": "Rsa验签，采用 SHA1 算法 默认编码 utf8",
+        "para": "string value, string publicKey, string sign, Encoding encoding=Encoding.utf8",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.RsaVerify(string value, string publicKey, string sign, Encoding encoding)"
+      },
+      {
+        "nvTitle": "Rsa2Verify",
+        "name": "Rsa2Verify(string value, string publicKey, string sign, Encoding encoding=Encoding.utf8)",
+        "dec": "Rsa验签，采用 SHA256 算法 默认编码 utf8",
+        "para": "string value, string publicKey, string sign, Encoding encoding=Encoding.utf8",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.Rsa2Verify(string value, string publicKey, string sign, Encoding encoding)"
+      },
+      {
+        "nvTitle": "HmacSha256",
+        "name": "HmacSha256(string value,string key, Encoding encoding=Encoding.utf8)",
+        "dec": "HMACSHA256加密 默认编码 utf8",
+        "para": "sstring value,string key, Encoding encoding=Encoding.utf8",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Encrypt.HmacSha256(string value,string key, Encoding encoding=Encoding.utf8)"
+      }
+    ]
+  },
+  {
+    "title": "Enum",
+    "content": [
+      {
+        "nvTitle": "Parse<TEnum>",
+        "name": "Parse<TEnum>( object member)",
+        "dec": "获取获取实例 传入成员名或值,范例:Enum1枚举有成员A=0,则传入\"A\"或\"0\"获取 Enum1.A",
+        "para": "object member",
+        "ret": "TEnum",
+        "eg": "Util.Core.Helpers.Enum.Parse<TEnum>(0)"
+      },
+      {
+        "nvTitle": "GetName<TEnum>",
+        "name": "GetName<TEnum>( object member)",
+        "dec": "获取成员名 传入成员名、值、实例均可,范例:Enum1枚举有成员A=0,则传入Enum1.A或0,获取成员名A",
+        "para": " object member",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Enum.GetName<TEnum>(0)"
+      },
+      {
+        "nvTitle": "GetName",
+        "name": "GetName( Type type, object member)",
+        "dec": "获取成员名",
+        "para": "Type type, object member",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Enum.GetName(type, 0)"
+      },
+      {
+        "nvTitle": "GetItems",
+        "name": "GetItems(Type type)",
+        "dec": "获取项集合,文本设置为Description，值为Value",
+        "para": "Type type",
+        "ret": "List<Item>",
+        "eg": "Util.Core.Helpers.Enum.GetItems(type)"
+      }
+    ]
+  },
+  {
+    "title": "File",
+    "content": [
+      {
+        "nvTitle": "ToString",
+        "name": "ToString(Stream stream, Encoding encoding = null, int bufferSize = 1024 * 2, bool isCloseStream = true)",
+        "dec": "流转换成字符串",
+        "para": "Stream stream, Encoding encoding = null, int bufferSize = 1024 * 2, bool isCloseStream = true",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.File.ToString(stream, Encoding encoding = null, int bufferSize = 1024 * 2, bool isCloseStream = true)"
+      },
+      {
+        "nvTitle": "ToStringAsync",
+        "name": "ToStringAsync(Stream stream, Encoding encoding = null, int bufferSize = 1024 * 2, bool isCloseStream = true)",
+        "dec": "流转换成字符串",
+        "para": "Stream stream, Encoding encoding = null, int bufferSize = 1024 * 2, bool isCloseStream = true",
+        "ret": "Task<string>",
+        "eg": "Util.Core.Helpers.File.ToStringAsync(stream, Encoding encoding = null, int bufferSize = 1024 * 2, bool isCloseStream = true)"
+      },
+      {
+        "nvTitle": "CopyToStringAsync",
+        "name": "CopyToStringAsync(Stream stream, Encoding encoding = null)",
+        "dec": "复制流并转换成字符串 应用类型防止被修改而污染",
+        "para": "Stream stream, Encoding encoding = null",
+        "ret": "Task<string>",
+        "eg": "Util.Core.Helpers.File.CopyToStringAsync(Stream stream, Encoding encoding = null)"
       }
     ]
   }

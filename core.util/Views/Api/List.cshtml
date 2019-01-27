@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Util.Core.Helpers." + ((FunctionTitle)ViewBag.currentUtil).title;
+}
+<h2>Util.Core.Helpers.@Html.Raw(((FunctionTitle)ViewBag.currentUtil).title)</h2>
+<link href="~/css/site.css" rel="stylesheet" />
+<div class="row" style="">
+    <main role="main" class="pb-3">
+        <div class="row">
+            <div class="col-md2">
+
+            </div>
+            <div class="col-md10">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 left-nav">
+                <div>
+                    <div>
+                        @{
+                            foreach (var u in (List<FunctionTitle>)ViewBag.allData)
+                            {
+                                <div>@u.title</div>
+                                <ul class="utilNav">
+                                    @foreach (var c in u.content)
+                                    {
+                                        <li><a href="/Api/List/@u.title#@c.nvTitle">@c.nvTitle</a></li>
+                                    }
+                                </ul>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 right-content">
+                <div class="col-md-12">
+                    @{
+                        foreach (var c in ((FunctionTitle)ViewBag.currentUtil).content)
+                        {
+                            <dl>
+                                <dt>
+                                    <a name='@c.nvTitle' class="mao"></a>
+                                    @c.name
+                                </dt>
+                                <dd>
+                                    <span class="label">para</span>: @c.para
+                                </dd>
+                                <dd>
+                                    <span class="label">return</span>: @c.ret
+                                </dd>
+                                <dd>
+                                    <span class="label">eg</span>:@c.eg
+                                </dd>
+                            </dl>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>

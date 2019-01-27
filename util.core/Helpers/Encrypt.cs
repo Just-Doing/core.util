@@ -74,7 +74,7 @@ namespace Util.Core.Helpers {
         /// <summary>
         /// DES密钥,24位字符串
         /// </summary>
-        public static string DesKey = "#s^un2ye21fcv%|f0XpR,+vh";
+        public static string DesKey = "1qaz!QAZ";
 
         /// <summary>
         /// DES加密
@@ -200,7 +200,7 @@ namespace Util.Core.Helpers {
         /// <summary>
         /// AES密钥
         /// </summary>
-        public static string AesKey = "QaP1AF8utIarcBqdhYTZpVGbiNQ9M6IL";
+        public static string AesKey = "1qaz!QAZ";
 
         /// <summary>
         /// AES加密

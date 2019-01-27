@@ -16,7 +16,6 @@ E:\git\nicol-util\core.util\obj\Debug\netcoreapp2.2\core.util.AssemblyInfo.cs
 E:\git\nicol-util\core.util\obj\Debug\netcoreapp2.2\core.util.TagHelpers.input.cache
 E:\git\nicol-util\core.util\obj\Debug\netcoreapp2.2\core.util.TagHelpers.output.cache
 E:\git\nicol-util\core.util\obj\Debug\netcoreapp2.2\core.util.RazorCoreGenerate.cache
-E:\git\nicol-util\core.util\obj\Debug\netcoreapp2.2\Razor\Views\Api\Common.g.cshtml.cs
 E:\git\nicol-util\core.util\obj\Debug\netcoreapp2.2\Razor\Views\Api\Index.g.cshtml.cs
 E:\git\nicol-util\core.util\obj\Debug\netcoreapp2.2\Razor\Views\Api\String.g.cshtml.cs
 E:\git\nicol-util\core.util\obj\Debug\netcoreapp2.2\Razor\Views\Home\About.g.cshtml.cs
@@ -72,3 +71,4 @@ D:\git\core.util\core.util\obj\Debug\netcoreapp2.2\core.util.Views.pdb
 D:\git\core.util\core.util\obj\Debug\netcoreapp2.2\core.util.csproj.CopyComplete
 D:\git\core.util\core.util\obj\Debug\netcoreapp2.2\core.util.dll
 D:\git\core.util\core.util\obj\Debug\netcoreapp2.2\core.util.pdb
+E:\git\nicol-util\core.util\obj\Debug\netcoreapp2.2\Razor\Views\Api\List.g.cshtml.cs
