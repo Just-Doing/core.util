@@ -13,8 +13,11 @@ namespace Util.Test
         [Fact]
         public void IocTest()
         {
-            var contener = Ioc.CreateContainer(new CalcConfig());
-            var service = contener.Create<IClass>();
+            IConfig[] configs = new IConfig[] {
+                new CalcConfig()
+            };
+            Ioc.Register(configs);
+            var service = Ioc.Create<IClass>();
             Assert.Equal<int>(7, service.Calc(1, 2));
         }
 

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using core.util.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Util.Core.Helpers;
+using Util.Dependency;
 
 namespace core.util
 {
@@ -45,6 +48,11 @@ namespace core.util
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            IConfig[] configs = new IConfig[] {
+                new CalcConfig()
+            };
+            Ioc.Register(configs);
 
             app.UseStaticFiles();
             app.UseCookiePolicy();

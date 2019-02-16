@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using core.util.IocTest;
 using core.util.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Util.Core.Helpers;
+using Util.Dependency;
 
 namespace core.util.Controllers
 {
@@ -24,11 +28,25 @@ namespace core.util.Controllers
 
             ViewBag.allData = allData;
             ViewBag.currentUtil = currentUtil;
+
+            var service = Ioc.Create<IClass>();
+            var res = service.Calc(1, 2);
+
+
+
             return View();
         }
         public IActionResult String()
         {
             return View();
+        }
+    }
+    public class CalcConfig : Module, IConfig
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<MyClass2>().As<MyClass2>();
+            builder.RegisterType<MyClass>().As<IClass>();
         }
     }
 }
