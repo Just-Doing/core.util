@@ -1,0 +1,17 @@
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\Util.Test.deps.json
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\Util.Test.runtimeconfig.json
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\Util.Test.runtimeconfig.dev.json
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\Util.Test.dll
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\Util.Test.pdb
+E:\git\nicol-util\Util.Test\obj\Debug\netcoreapp2.2\Util.Test.csprojAssemblyReference.cache
+E:\git\nicol-util\Util.Test\obj\Debug\netcoreapp2.2\Util.Test.csproj.CoreCompileInputs.cache
+E:\git\nicol-util\Util.Test\obj\Debug\netcoreapp2.2\Util.Test.AssemblyInfoInputs.cache
+E:\git\nicol-util\Util.Test\obj\Debug\netcoreapp2.2\Util.Test.AssemblyInfo.cs
+E:\git\nicol-util\Util.Test\obj\Debug\netcoreapp2.2\Util.Test.dll
+E:\git\nicol-util\Util.Test\obj\Debug\netcoreapp2.2\Util.Test.pdb
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\util.core.dll
+E:\git\nicol-util\Util.Test\bin\Debug\netcoreapp2.2\util.core.pdb
+E:\git\nicol-util\Util.Test\obj\Debug\netcoreapp2.2\Util.Test.csproj.CopyComplete
