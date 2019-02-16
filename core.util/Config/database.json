@@ -16,7 +16,7 @@
         "dec": "获取对象类型",
         "para": "none",
         "ret": "Type",
-        "eg": "\"Util.Core.Helpers.Common.GetTypeT(\"test\")  == > string\""
+        "eg": "Util.Core.Helpers.Common.GetTypeT(\"test\")  == > string\""
       },
       {
         "nvTitle": "GetPhysicalPath",
@@ -24,7 +24,7 @@
         "dec": "根据相对路径获取物理路径",
         "para": "string relativePath",
         "ret": "string",
-        "eg": "\"Util.Core.Helpers.Common.GetPhysicalPath(\"test/t.html\")  == > c://wwwroot/test/t.html\""
+        "eg": "Util.Core.Helpers.Common.GetPhysicalPath(\"test/t.html\")  == > c://wwwroot/test/t.html\""
       },
       {
         "nvTitle": "GetWebRootPath",
@@ -32,7 +32,7 @@
         "dec": "根据相对路径获取站点项目的根路径",
         "para": "string relativePath",
         "ret": "string",
-        "eg": "\"Util.Core.Helpers.Common.GetWebRootPath(\"test/t.html\")  == > c://wwwroot/test/t.html\""
+        "eg": "Util.Core.Helpers.Common.GetWebRootPath(\"test/t.html\")  == > c://wwwroot/test/t.html\""
       }
     ]
   },
@@ -61,7 +61,7 @@
         "dec": "首字母小写",
         "para": "string value",
         "ret": "string",
-        "eg": "\"Util.Core.Helpers.Common.FirstLowerCase(\"TEST\")  == > \"tEST\"\""
+        "eg": "Util.Core.Helpers.Common.FirstLowerCase(\"TEST\")  == > \"tEST\"\""
       }
     ]
   },
@@ -90,7 +90,7 @@
         "dec": "转换为64位整型",
         "para": "object input",
         "ret": "long",
-        "eg": "\"Util.Core.Helpers.Convert.ToLong(\"1\")  == > \"1.00\"\""
+        "eg": "Util.Core.Helpers.Convert.ToLong(\"1\")  == > \"1.00\"\""
       },
       {
         "nvTitle": "ToLongOrNull",
@@ -98,7 +98,7 @@
         "dec": "转换为64位整型 失败时返回null",
         "para": "object input",
         "ret": "long?",
-        "eg": "\"Util.Core.Helpers.Convert.ToLongOrNull(\"1a\")  == > null"
+        "eg": "Util.Core.Helpers.Convert.ToLongOrNull(\"1a\")  == > null"
       },
       {
         "nvTitle": "ToFloat",
@@ -106,7 +106,7 @@
         "dec": "转换为32位浮点型,并按指定小数位舍入",
         "para": "object input, int? digits = null",
         "ret": "float",
-        "eg": "\"Util.Core.Helpers.Convert.ToFloat(\"1.000000000000000000000001\")"
+        "eg": "Util.Core.Helpers.Convert.ToFloat(\"1.000000000000000000000001\")"
       },
       {
         "nvTitle": "ToFloatOrNull",
@@ -114,7 +114,7 @@
         "dec": "转换为32位浮点型,并按指定小数位舍入, 失败返回null",
         "para": "object input, int? digits = null",
         "ret": "float?",
-        "eg": "\"Util.Core.Helpers.Convert.ToFloatOrNull(\"a\") => null"
+        "eg": "Util.Core.Helpers.Convert.ToFloatOrNull(\"a\") => null"
       },
       {
         "nvTitle": "ToDouble",
@@ -122,7 +122,7 @@
         "dec": "转换为64位浮点型,并按指定小数位舍入",
         "para": "object input, int? digits = null",
         "ret": "double",
-        "eg": "\"Util.Core.Helpers.Convert.ToDouble(\"1.00000000001\")"
+        "eg": "Util.Core.Helpers.Convert.ToDouble(\"1.00000000001\")"
       },
       {
         "nvTitle": "ToDoubleOrNull",
@@ -130,7 +130,7 @@
         "dec": "转换为64位浮点型,并按指定小数位舍入 失败时返回null",
         "para": "object input, int? digits = null",
         "ret": "double?",
-        "eg": "\"Util.Core.Helpers.Convert.ToDoubleOrNull(\"a\") => null"
+        "eg": "Util.Core.Helpers.Convert.ToDoubleOrNull(\"a\") => null"
       },
       {
         "nvTitle": "ToDecimal",
@@ -138,7 +138,7 @@
         "dec": "转换为128位浮点型,并按指定小数位舍入",
         "para": "object input, int? digits = null",
         "ret": "decimal",
-        "eg": "\"Util.Core.Helpers.Convert.ToDecimal(\"1.0000000000000000000000000001\")"
+        "eg": "Util.Core.Helpers.Convert.ToDecimal(\"1.0000000000000000000000000001\")"
       },
       {
         "nvTitle": "ToDecimalOrNull",
@@ -146,7 +146,7 @@
         "dec": "转换为128位浮点型,并按指定小数位舍入 失败时返回null",
         "para": "object input, int? digits = null",
         "ret": "decimal?",
-        "eg": "\"Util.Core.Helpers.Convert.ToDecimal(\"1.0000000000000000000000000001\")"
+        "eg": "Util.Core.Helpers.Convert.ToDecimal(\"1.0000000000000000000000000001\")"
       },
       {
         "nvTitle": "ToBool",
@@ -154,7 +154,7 @@
         "dec": "转换为布尔值",
         "para": "object input",
         "ret": "bool",
-        "eg": "\"Util.Core.Helpers.Convert.ToBool(\"1\") => true"
+        "eg": "Util.Core.Helpers.Convert.ToBool(\"1\") => true"
       },
       {
         "nvTitle": "ToBoolOrNull",
@@ -162,7 +162,7 @@
         "dec": "转换为布尔值 失败时返回null",
         "para": "object input",
         "ret": "bool?",
-        "eg": "\"Util.Core.Helpers.Convert.ToBoolOrNull(\"a\") => null"
+        "eg": "Util.Core.Helpers.Convert.ToBoolOrNull(\"a\") => null"
       },
       {
         "nvTitle": "ToDate",
@@ -170,7 +170,7 @@
         "dec": "转换为日期",
         "para": "object input",
         "ret": "DateTime",
-        "eg": "\"Util.Core.Helpers.Convert.ToDate(\"2019-01-01 12:12:12\")"
+        "eg": "Util.Core.Helpers.Convert.ToDate(\"2019-01-01 12:12:12\")"
       },
       {
         "nvTitle": "ToDateOrNull",
@@ -178,7 +178,7 @@
         "dec": "转换为日期 失败时返回null",
         "para": "object input",
         "ret": "DateTime?",
-        "eg": "\"Util.Core.Helpers.Convert.ToDateOrNull(\"aaa\") => null"
+        "eg": "Util.Core.Helpers.Convert.ToDateOrNull(\"aaa\") => null"
       },
       {
         "nvTitle": "ToGuid",
@@ -186,7 +186,7 @@
         "dec": "转换为Guid",
         "para": "object input",
         "ret": "Guid",
-        "eg": "\"Util.Core.Helpers.Convert.ToGuid(\"guid..\""
+        "eg": "Util.Core.Helpers.Convert.ToGuid(\"guid..\""
       },
       {
         "nvTitle": "ToGuidList",
@@ -194,7 +194,7 @@
         "dec": "转换为Guid集合 以逗号分隔的Guid集合字符串，范例:83B0233C-A24F-49FD-8083-1337209EBC9A,EAB523C6-2FE7-47BE-89D5-C6D440C3033A",
         "para": "object input",
         "ret": "List<Guid>",
-        "eg": "\"\\\"Util.Core.Helpers.Convert.ToGuidList(\"guid1\\\",\\\"guid2\\\"\")"
+        "eg": "Util.Core.Helpers.Convert.ToGuidList(\"guid1\\\",\\\"guid2\\\"\")"
       },
       {
         "nvTitle": "To<T>",
@@ -202,7 +202,7 @@
         "dec": "通用泛型转换",
         "para": "object input",
         "ret": "T",
-        "eg": "\"\\\"Util.Core.Helpers.Convert.ToList<class>(\"{test:\"test1\"}\")"
+        "eg": "Util.Core.Helpers.Convert.ToList<class>(\"{test:\"test1\"}\")"
       },
       {
         "nvTitle": "ToList<T>",
@@ -210,7 +210,7 @@
         "dec": "泛型集合转换 范例:83B0233C-A24F-49FD-8083-1337209EBC9A,EAB523C6-2FE7-47BE-89D5-C6D440C3033A",
         "para": "object input",
         "ret": "List<T>",
-        "eg": "\"\\\"Util.Core.Helpers.Convert.ToList<class>(\"asdasd,asdasd\")"
+        "eg": "Util.Core.Helpers.Convert.ToList<class>(\"asdasd,asdasd\")"
       },
       {
         "nvTitle": "ToBytes",
@@ -218,7 +218,7 @@
         "dec": "转换为字节数组",
         "para": "object input",
         "ret": "byte[]",
-        "eg": "\"\\\"Util.Core.Helpers.Convert.ToBytes(\"asd\")"
+        "eg": "Util.Core.Helpers.Convert.ToBytes(\"asd\")"
       },
       {
         "nvTitle": "ToBytes",
@@ -226,7 +226,7 @@
         "dec": "转换为字节数组",
         "para": "object input",
         "ret": "byte[]",
-        "eg": "\"\\\"Util.Core.Helpers.Convert.ToBytes(\"asd\", Encoding.utf8)"
+        "eg": "Util.Core.Helpers.Convert.ToBytes(\"asd\", Encoding.utf8)"
       }
     ]
   },
@@ -418,6 +418,239 @@
         "para": "Stream stream, Encoding encoding = null",
         "ret": "Task<string>",
         "eg": "Util.Core.Helpers.File.CopyToStringAsync(Stream stream, Encoding encoding = null)"
+      }
+    ]
+  },
+  {
+    "title": "Ioc",
+    "content": [
+      {
+        "nvTitle": "CreateContainer",
+        "name": "CreateContainer(IConfig[] configs)",
+        "dec": "创建容器",
+        "para": "IConfig[] configs",
+        "ret": "IContainer",
+        "eg": "Util.Core.Helpers.Ioc.CreateContainer(configs)"
+      },
+      {
+        "nvTitle": "Register",
+        "name": "Register(IConfig[] configs)",
+        "dec": "注册依赖",
+        "para": "IConfig[] configs",
+        "ret": "void",
+        "eg": "Util.Core.Helpers.Ioc.Register(configs)"
+      },
+      {
+        "nvTitle": "Register",
+        "name": "Register(IServiceCollection services, IConfig[] configs)",
+        "dec": "向目服务集合 注册依赖",
+        "para": "IServiceCollection services, IConfig[] configs",
+        "ret": "IServiceProvider",
+        "eg": "Util.Core.Helpers.Ioc.Register(services, configs)"
+      },
+      {
+        "nvTitle": "BeginScope",
+        "name": "BeginScope()",
+        "dec": "作用域开启",
+        "para": "none",
+        "ret": "IScope",
+        "eg": "Util.Core.Helpers.Ioc.BeginScope()"
+      },
+      {
+        "nvTitle": "Create",
+        "name": "Create<T>(Type type, string name = null)",
+        "dec": "获取相应的实例",
+        "para": "Type type, string name = null",
+        "ret": "T",
+        "eg": "Util.Core.Helpers.Ioc.Create<IClass>(type)"
+      },
+      {
+        "nvTitle": "CreateList",
+        "name": "CreateList<T>(Type type, string name = null)",
+        "dec": "获取相应的实例集合",
+        "para": "Type type, string name = null",
+        "ret": "List<T>",
+        "eg": "Util.Core.Helpers.Ioc.CreateList<IClass>(type)"
+      }
+    ]
+  },
+  {
+    "title": "Json",
+    "content": [
+      {
+        "nvTitle": "ToObject<T>",
+        "name": "ToObject<T>(string json)",
+        "dec": "将Json字符串转换为对象",
+        "para": "string json",
+        "ret": "T",
+        "eg": "Util.Core.Helpers.Json.ToObject(jsonStr)"
+      },
+      {
+        "nvTitle": "ToJson",
+        "name": "ToJson(object target, bool isConvertToSingleQuotes = false)",
+        "dec": "将对象转换为Json字符串",
+        "para": "object target, bool isConvertToSingleQuotes = false",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Json.ToJson(object target, bool isConvertToSingleQuotes = false)"
+      },
+      {
+        "nvTitle": "GetDataFromFile<T>",
+        "name": "GetDataFromFile<T>(string filePath)",
+        "dec": "获取文件中的json 数据",
+        "para": "string filePath",
+        "ret": "IServiceProvider",
+        "eg": "Util.Core.Helpers.Json.GetDataFromFile<T>(string filePath)"
+      }
+    ]
+  },
+  {
+    "title": "Random",
+    "content": [
+      {
+        "nvTitle": "Next(int max)",
+        "name": "Next(int max)",
+        "dec": "获取指定范围的随机整数",
+        "para": "max",
+        "ret": "int",
+        "eg": "Util.Core.Helpers.Random.Next(int max)"
+      },
+      {
+        "nvTitle": "Next",
+        "name": "Next(int min, int max)",
+        "dec": "获取指定范围的随机整数",
+        "para": "int min, int max",
+        "ret": "int",
+        "eg": "Util.Core.Helpers.Random.ToJson(int min, int max)"
+      },
+      {
+        "nvTitle": "Sort<T>",
+        "name": "Sort<T>( IEnumerable<T> array )",
+        "dec": "对集合随机排序",
+        "para": "IEnumerable<T> array ",
+        "ret": "List<T>",
+        "eg": "Util.Core.Helpers.Random.Sort<T>(IEnumerable<T> array)"
+      }
+    ]
+  },
+  {
+    "title": "Reflection",
+    "content": [
+      {
+        "nvTitle": "GetDescription<T>()",
+        "name": "Next(int max)",
+        "dec": "获取类型描述，使用DescriptionAttribute设置描述",
+        "para": "",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Reflection.GetDescription<T>()"
+      },
+      {
+        "nvTitle": "GetDescription",
+        "name": "GetDescription<T>(Type type, string memberName)",
+        "dec": "获取类型成员描述，使用DescriptionAttribute设置描述",
+        "para": "Type type, string memberName",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Reflection.GetDescription<T>(string memberName)"
+      },
+      {
+        "nvTitle": "GetDisplayName",
+        "name": "GetDisplayName( MemberInfo member)",
+        "dec": "获取显示名称，使用DisplayAttribute或DisplayNameAttribute设置显示名称",
+        "para": "MemberInfo member",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Reflection.GetDisplayName(emberInfo member)"
+      },
+      {
+        "nvTitle": "CreateInstance",
+        "name": "CreateInstance<T>(  Type type, params object[] parameters)",
+        "dec": "动态创建实例",
+        "para": " Type type, params object[] parameters",
+        "ret": "T",
+        "eg": "Util.Core.Helpers.Reflection.CreateInstance(emberInfo member)"
+      },
+      {
+        "nvTitle": "GetAssembly",
+        "name": "GetAssembly(  string assemblyName)",
+        "dec": "获取程序集",
+        "para": "string assemblyName",
+        "ret": "Assembly",
+        "eg": "Util.Core.Helpers.Reflection.GetAssembly(string assemblyName)"
+      },
+      {
+        "nvTitle": "Is[type]",
+        "name": "Is[type](PropertyInfo property)|Is[type](MemberInfo property)",
+        "dec": "判断成员或者属性是否是对应的类型：[type] 中的type 可能是 Bool/int/string/Number/DateEnum/Enum/GenericCollection",
+        "para": "MemberInfo property",
+        "ret": "bool",
+        "eg": "Util.Core.Helpers.Reflection.Is[type](MemberInfo property)"
+      },
+      {
+        "nvTitle": "GetAssemblies",
+        "name": "GetAssemblies(string directoryPath)",
+        "dec": "从目录中获取所有程序集",
+        "para": "string directoryPath",
+        "ret": "List<Assembly>",
+        "eg": "Util.Core.Helpers.Reflection.GetAssemblies(string assemblyName)"
+      },
+      {
+        "nvTitle": "GetPublicProperties",
+        "name": "GetPublicProperties(object instance)",
+        "dec": "从目录中获取所有程序集",
+        "para": "object instance",
+        "ret": "List<Item>",
+        "eg": "Util.Core.Helpers.Reflection.GetPublicProperties(string assemblyName)"
+      },
+      {
+        "nvTitle": "GetTopBaseType",
+        "name": "GetTopBaseType<T>()|GetTopBaseType(Type type)",
+        "dec": "获取顶级基类",
+        "para": "none|Type type",
+        "ret": "Type",
+        "eg": "Util.Core.Helpers.Reflection.GetTopBaseType<T>()"
+      }
+    ]
+  },
+  {
+    "title": "Regex",
+    "content": [
+      {
+        "nvTitle": "GetValues",
+        "name": "GetValues(string input, string pattern, string[] resultPatterns, RegexOptions options = RegexOptions.IgnoreCase)",
+        "dec": "获取匹配值集合 一对括号resultPatterns 加一个$1",
+        "para": "GetValues(\"test13te2s3t4\",@\"(\\d+)(\\w*)(\\d+)\",new[] {\"$1\",\"$2\",\"$3\"})",
+        "ret": "Dictionary<string, string>",
+        "eg": "Util.Core.Helpers.Regex.GetValues(string input, string pattern, string[] resultPatterns, RegexOptions options = RegexOptions.IgnoreCase)"
+      },
+      {
+        "nvTitle": "GetValue",
+        "name": "GetValue(string input, string pattern, string resultPattern ='' RegexOptions options = RegexOptions.IgnoreCase)",
+        "dec": "获取匹配值 一对括号resultPatterns 加一个$1",
+        "para": "GetValues(\"test13te2s3t4\",@\"(\\d+)(\\w*)(\\d+)\",\"$1\")",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Regex.GetValue(string input, string pattern, string resultPatterns='', RegexOptions options = RegexOptions.IgnoreCase)"
+      },
+      {
+        "nvTitle": "Split",
+        "name": "Split(string input, string pattern, RegexOptions options = RegexOptions.IgnoreCase)",
+        "dec": "分割成字符串数组",
+        "para": "GetValues(string input, string pattern, RegexOptions options = RegexOptions.IgnoreCase)",
+        "ret": "string[]",
+        "eg": "Util.Core.Helpers.Regex.Split(string input, string pattern, RegexOptions options = RegexOptions.IgnoreCase)"
+      },
+      {
+        "nvTitle": "Replace",
+        "name": "Replace(string input, string pattern,string replacement, RegexOptions options = RegexOptions.IgnoreCase)",
+        "dec": "替换",
+        "para": "Replace(string input, string pattern,string replacement, RegexOptions options = RegexOptions.IgnoreCase)",
+        "ret": "string",
+        "eg": "Util.Core.Helpers.Regex.Replace(string input, string pattern,string replacement, RegexOptions options = RegexOptions.IgnoreCase)"
+      },
+      {
+        "nvTitle": "IsMatch",
+        "name": "IsMatch(string input, string pattern, RegexOptions options = RegexOptions.IgnoreCase)",
+        "dec": "验证输入与模式是否匹配",
+        "para": "IsMatch(string input, string pattern, RegexOptions options = RegexOptions.IgnoreCase)",
+        "ret": "bool",
+        "eg": "Util.Core.Helpers.Regex.IsMatch(string input, string pattern, RegexOptions options = RegexOptions.IgnoreCase)"
       }
     ]
   }
