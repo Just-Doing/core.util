@@ -32,7 +32,8 @@ namespace core.util.Controllers
             var service = Ioc.Create<IClass>();
             var res = service.Calc(1, 2);
 
-
+            Func<int, int> f = (x) => x + 1;
+            var s = f(2);
 
             return View();
         }
