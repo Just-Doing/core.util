@@ -74,7 +74,8 @@ namespace Util.Core.Helpers {
         /// <summary>
         /// DES密钥,24位字符串
         /// </summary>
-        public static string DesKey = "1qaz!QAZ";
+        public static string DesKey =  "1qaz!QAZ";
+        public static char FillValue =  'a';
 
         /// <summary>
         /// DES加密
@@ -90,7 +91,7 @@ namespace Util.Core.Helpers {
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥,24位</param>
         public static string DesEncrypt( object value, string key ) {
-            return DesEncrypt( value, key, Encoding.UTF8 );
+            return DesEncrypt( value, GetBase64String(StringFillToLength(key,32, FillValue)), Encoding.UTF8 );
         }
 
         /// <summary>
@@ -177,26 +178,7 @@ namespace Util.Core.Helpers {
         #endregion
 
         #region AES加密
-
-        /// <summary>
-        /// 128位0向量
-        /// </summary>
-        private static byte[] _iv;
-        /// <summary>
-        /// 128位0向量
-        /// </summary>
-        private static byte[] Iv {
-            get {
-                if( _iv == null ) {
-                    var size = 16;
-                    _iv = new byte[size];
-                    for( int i = 0; i < size; i++ )
-                        _iv[i] = 0;
-                }
-                return _iv;
-            }
-        }
-
+        
         /// <summary>
         /// AES密钥
         /// </summary>
@@ -228,7 +210,7 @@ namespace Util.Core.Helpers {
         public static string AesEncrypt( string value, string key, Encoding encoding ) {
             if( string.IsNullOrWhiteSpace( value ) || string.IsNullOrWhiteSpace( key ) )
                 return string.Empty;
-            var rijndaelManaged = CreateRijndaelManaged( key );
+            var rijndaelManaged = CreateRijndaelManaged(key);
             using( var transform = rijndaelManaged.CreateEncryptor( rijndaelManaged.Key, rijndaelManaged.IV ) ) {
                 return GetEncryptResult( value, encoding, transform );
             }
@@ -238,11 +220,14 @@ namespace Util.Core.Helpers {
         /// 创建RijndaelManaged
         /// </summary>
         private static RijndaelManaged CreateRijndaelManaged( string key ) {
+            byte[] ivBytes = Encoding.UTF8.GetBytes(StringFillToLength(key, 16, FillValue));
+
             return new RijndaelManaged {
-                Key = System.Convert.FromBase64String( key ),
+                Key = System.Convert.FromBase64String(GetBase64String(StringFillToLength(key, 32, FillValue))),
+
                 Mode = CipherMode.CBC,
                 Padding = PaddingMode.PKCS7,
-                IV = Iv
+                IV = ivBytes
             };
         }
 
@@ -272,7 +257,7 @@ namespace Util.Core.Helpers {
         public static string AesDecrypt( string value, string key, Encoding encoding ) {
             if( string.IsNullOrWhiteSpace( value ) || string.IsNullOrWhiteSpace( key ) )
                 return string.Empty;
-            var rijndaelManaged = CreateRijndaelManaged( key );
+            var rijndaelManaged = CreateRijndaelManaged(key );
             using( var transform = rijndaelManaged.CreateDecryptor( rijndaelManaged.Key, rijndaelManaged.IV ) ) {
                 return GetDecryptResult( value, encoding, transform );
             }
@@ -410,5 +395,32 @@ namespace Util.Core.Helpers {
         }
 
         #endregion
+        /// <summary>
+        /// 获取字符串的base64 编码
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string GetBase64String(string input)
+        {
+            var byts = Encoding.UTF8.GetBytes(input) ;
+            var res = System.Convert.ToBase64String(byts);
+            return res;
+        }
+
+
+        private static string StringFillToLength(string input, int length, char fillValue)
+        {
+            if (input.Length < length)
+            {
+                var s = new string(fillValue, length - input.Length);
+                return input + s;
+            }
+            else
+            {
+                return input.Substring(0, length);
+            }
+        }
+
+
     }
 }
