@@ -8,6 +8,7 @@ using core.util.IocTest;
 using core.util.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using util.core.Helpers;
 using Util.Core.Helpers;
 using Util.Dependency;
 
@@ -35,6 +36,10 @@ namespace core.util.Controllers
             Func<int, int> f = (x) => x + 1;
             var s = f(2);
 
+            var s1 = MachineCode.GetMachineCodeString();
+            var s2 = Encrypt.AesEncrypt(s1, "1qaz!QAZ");
+            var s3 = Encrypt.AesDecrypt("GDKxvgeFIldacXK91rSU+9/qh8iKNBdGjiNbBJ60KFF1KJ6BzGBSqjbrafAvli72mxf3ffQA4p9qKdXBaSG7cg==", "1qaz!QAQ");
+            ViewBag.machinecode = s1;
             return View();
         }
         public IActionResult String()

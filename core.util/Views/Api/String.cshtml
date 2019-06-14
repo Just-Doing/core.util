@@ -1,7 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "Util.Core.Helpers.String";
+    ViewData["Title"] = "Util.Core.Helpers.Encrypt";
 }
-<h2>@ViewData["Title"]</h2>
+<h2>加解密</h2>
 
 <link href="~/css/site.css" rel="stylesheet" />
 <div class="row" style="">
@@ -20,38 +20,6 @@
             </dd>
             <dd>
                 <span class="label">eg</span>: Util.Core.Helpers.String.PinYin("中国") = > "zg"
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <a name='Join' class="mao"></a>
-                Join< string >(IEnumerable<T> list, string quotes = "", string separator = "," )
-            </dt>
-            <dd><span class="label">dec</span>: 将集合连接为带分隔符的字符串</dd>
-            <dd>
-                <span class="label">para</span>: IEnumerable<T> list, string quotes = "", string separator = ","
-            </dd>
-            <dd>
-                <span class="label">return</span>: string
-            </dd>
-            <dd>
-                <span class="label">eg</span>: Util.Core.Helpers.Common.Join< string >([a,b,c,d, "'",","])  == > "'a','b','c'"
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                <a name='FirstLowerCase' class="mao"></a>
-                FirstLowerCase(string value)
-            </dt>
-            <dd><span class="label">dec</span>: 首字母小写</dd>
-            <dd>
-                <span class="label">para</span>: string value
-            </dd>
-            <dd>
-                <span class="label">return</span>: string
-            </dd>
-            <dd>
-                <span class="label">eg</span>: Util.Core.Helpers.Common.FirstLowerCase("TEST")  == > "tEST"
             </dd>
         </dl>
     </div>

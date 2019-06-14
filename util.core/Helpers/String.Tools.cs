@@ -136,5 +136,12 @@ namespace Util.Core.Helpers {
         }
 
         #endregion
+
+        public static string FromBase64(string base64Str)
+        {
+            var b = System.Convert.FromBase64String(base64Str);
+            var value = System.Text.Encoding.UTF8.GetString(b);
+            return value;
+        }
     }
 }

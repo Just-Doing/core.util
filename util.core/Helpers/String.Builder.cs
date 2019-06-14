@@ -118,5 +118,6 @@ namespace Util.Core.Helpers {
         public override string ToString() {
             return Builder.ToString();
         }
+
     }
 }

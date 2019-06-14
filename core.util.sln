@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "util.core", "util.core\util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core.util", "core.util\core.util.csproj", "{E77E95DC-2B06-4F1C-A3AA-98F4FFE5C661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util.Test", "Util.Test\Util.Test.csproj", "{AF8204A7-4DD1-4C08-B6F0-7D9F33EBDB43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util.Test", "Util.Test\Util.Test.csproj", "{AF8204A7-4DD1-4C08-B6F0-7D9F33EBDB43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

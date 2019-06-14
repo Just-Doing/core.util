@@ -145,5 +145,17 @@ namespace Util.Core
                 return new List<Guid>();
             return obj.Select( t => t.ToGuid() ).ToList();
         }
+
+        /// <summary>
+        /// 转换为Base64 字符串
+        /// </summary>
+        /// <param name="obj">字符串</param>
+        public static string ToBase64(this string obj)
+        {
+            byte[] b = System.Text.Encoding.Default.GetBytes(obj);
+            var base64Str = Convert.ToBase64String(b);
+            return base64Str;
+        }
+
     }
 }
