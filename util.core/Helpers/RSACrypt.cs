@@ -50,12 +50,32 @@ namespace util.core.Helpers
             return result;
         }
 
+        static public byte[] RSAEncrypt(byte[] DataToEncrypt, RSAParameters RSAKeyInfo, bool DoOAEPPadding)
+        {
+            try
+            {
+                byte[] encryptedData;
+                //Create a new instance of RSACryptoServiceProvider.
+                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                {
+                    RSA.ImportParameters(RSAKeyInfo);
+                    encryptedData = RSA.Encrypt(DataToEncrypt, DoOAEPPadding);
+                }
+                return encryptedData;
+            }
+            catch (CryptographicException e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
         /// <summary>  
         /// 加密  
         /// </summary>  
-        /// <param name="resData">需要加密的字符串</param>  
-        /// <param name="publicKey">公钥</param>  
-        /// <param name="input_charset">编码格式</param>  
+        /// <param name="resData">需要加密的字符串</param>
+        /// <param name="publicKey">公钥</param>
+        /// <param name="input_charset">编码格式</param>
         /// <returns>明文</returns>  
         public static string encryptData(string resData, string publicKey, string input_charset)
         {
@@ -63,27 +83,7 @@ namespace util.core.Helpers
             string result = encrypt(DataToEncrypt, publicKey, input_charset);
             return result;
         }
-
-        public static string encryData()
-        {
-            var base64StrToken = "V7OMYsjQD8IxOayzupRxkcY8N/bynrp5H2WAPefzeX5vXI73+dcPupAKiA6podL52uIbuQ8VZw4pDduS7buTRyBTFbhZ9T+SJaLOszjBnvyzNzrd1L2WqnWoBiL+o6JDo3y371zUAKZ7D/hIpdGLilEhHEbJCw0HEyJgHWw+E1Y=";
-            var str = "VVNJRD0xNzQ1NDF8T1JHSUQ9MTE2ODg5fFRJTUU9MjAxOS0wNC0yOVQxNDo1MjowNnxJUD05OS4xMi4zOS4yMjB8U0FQSUQ9ODAxNzQ1NDF8RU1BSUw9aGV5YW5namlhbkBjbWJjaGluYS5jb218TkFNRT262NH0vaN8QlIxPTEwMDAwM3xQQVRIPdfc0NAv0MXPory8yvWyvy/V0NL4zfjC57/GvLwv0dC3otbQ0MQvyv2+3bLWv+K/qreizcW20y+8qNCnudzA7dOm08O/qreiytKjqMnu29qjqXxHUElEPTAxMDAwNDU4VEc=";
-            var key = "MIIBvjCCAWigAwIBAgIQ/tsN7pBT+bFH8H01tmV8czANBgkqhkiG9w0BAQQFADAWMRQwEgYDVQQDEwtSb290IEFnZW5jeTAeFw0xMTA2MDEwMTQzNDZaFw0zOTEyMzEyMzU5NTlaMBkxFzAVBgNVBAMeDk4ATouQGm1Li9WLwU5mMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwgF + k8qD1bsOReIA + 4NEme9ic73qiFOHC9J3T5MShcDlJ6M4cBC3zmSzrGUnR3BDHbyDrK / wzckS5dQxzwMmwovbKbgNAQoRlDUr9RAoBGBrwMxZ1d1hNNaa3Jxz2gNeY3SucBDtt6lb8Vxv5sjJB0n8bMlQsnUV / kItELPn7jQIDAQABo0swSTBHBgNVHQEEQDA + gBAS5AktBh0dTwCNYSHcFmRjoRgwFjEUMBIGA1UEAxMLUm9vdCBBZ2VuY3mCEAY3bACqAGSKEc + 41KpcNfQwDQYJKoZIhvcNAQEEBQADQQBiNSHpnzyQbbwj5PRUT4T + As1soAUBfMjsl5oRuENhfJ3kJ5t + 6wdlkEDJH9ww48w0yJLmJlsiP0fjMMtKgjMz";
-            
-            // 读取pfx证书
-            X509Certificate2 x509 = new X509Certificate2(@"d:\\key.pfx", "654321", X509KeyStorageFlags.Exportable);
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            byte[] cipherbytes;
-            var gbk = System.Text.Encoding.GetEncoding("gb2312");
-            var pkey = gbk.GetString(x509.GetPublicKey());
-            rsa.FromXmlString(pkey);
-
-            cipherbytes = rsa.Decrypt(System.Convert.FromBase64String(base64StrToken), false);
-
-            var value = gbk.GetString(cipherbytes);
-            return value;
-        }
-
+        
         /// <summary>  
         /// 解密  
         /// </summary>  

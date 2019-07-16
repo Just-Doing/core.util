@@ -87,7 +87,7 @@ namespace Util.Webs.Clients {
             _url = url;
             _httpMethod = httpMethod;
             _params = new Dictionary<string, object>();
-            _contentType = HttpContentType.FormUrlEncoded.Description();
+            _contentType = "application/json";
             _cookieContainer = new CookieContainer();
             _timeout = new TimeSpan( 0, 0, 30 );
             _headers = new Dictionary<string, string>();

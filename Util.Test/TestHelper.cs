@@ -1,15 +1,18 @@
 ﻿using Autofac;
 using Autofac.Core;
 using core.util.IocTest;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using util.core.Helpers;
 using Util.Core.Helpers;
 using Util.Dependency;
+using Util.Webs.Clients;
 using Xunit;
 
 namespace Util.Test
@@ -30,21 +33,89 @@ namespace Util.Test
         [Fact]
         public void DetryTest()
         {
-            string value = RSACrypt.encryData();
+            //string value = RSACrypt.encryData();
             //string value = RSACrypt.decryptData(base64StrToken, key, "UTF-8");
-            Assert.False(value=="");
+            //Assert.False(value=="");
         }
-
-
+        
         [Fact]
         public void EntryTest()
         {
-            var str = "test";
-            var key = "MIIBvjCCAWigAwIBAgIQ/tsN7pBT+bFH8H01tmV8czANBgkqhkiG9w0BAQQFADAWMRQwEgYDVQQDEwtSb290IEFnZW5jeTAeFw0xMTA2MDEwMTQzNDZaFw0zOTEyMzEyMzU5NTlaMBkxFzAVBgNVBAMeDk4ATouQGm1Li9WLwU5mMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwgF + k8qD1bsOReIA + 4NEme9ic73qiFOHC9J3T5MShcDlJ6M4cBC3zmSzrGUnR3BDHbyDrK / wzckS5dQxzwMmwovbKbgNAQoRlDUr9RAoBGBrwMxZ1d1hNNaa3Jxz2gNeY3SucBDtt6lb8Vxv5sjJB0n8bMlQsnUV / kItELPn7jQIDAQABo0swSTBHBgNVHQEEQDA + gBAS5AktBh0dTwCNYSHcFmRjoRgwFjEUMBIGA1UEAxMLUm9vdCBBZ2VuY3mCEAY3bACqAGSKEc + 41KpcNfQwDQYJKoZIhvcNAQEEBQADQQBiNSHpnzyQbbwj5PRUT4T + As1soAUBfMjsl5oRuENhfJ3kJ5t + 6wdlkEDJH9ww48w0yJLmJlsiP0fjMMtKgjMz";
-            string value = RSACrypt.encryptData(str, key, "UTF-8");
-            Assert.Equal<string>("123", value);
-        }
+            var entrData = System.Text.Encoding.UTF8.GetBytes("test");
 
+            //公钥加密
+            RSACryptoServiceProvider entry_Rsa = new RSACryptoServiceProvider();
+            string fname = @"D:\cert\public_test.crt";
+            X509Certificate2 pubCert = new X509Certificate2(fname);
+            var keyPara = pubCert.GetRSAPublicKey();
+            var para = keyPara.ExportParameters(false);
+            entry_Rsa.ImportParameters(para);
+            var encryptedData = entry_Rsa.Encrypt(entrData, false);
+            var base64Str = System.Convert.ToBase64String(encryptedData);// 需要base64 加密返回
+            
+
+            //私钥解密
+            string privateFname = @"D:\cert\private_test.pfx";
+            X509Certificate2 prvcrt = new X509Certificate2(privateFname, "1qaz!QAZ", X509KeyStorageFlags.Exportable);
+            RSA decry_Rsa = prvcrt.GetRSAPrivateKey() ;
+            var decryRes = decry_Rsa.Decrypt(encryptedData, RSAEncryptionPadding.Pkcs1);
+            var res = System.Text.Encoding.UTF8.GetString(decryRes);
+
+
+            //私钥签名
+            var data = decry_Rsa.SignData(entrData, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+            var signRes = System.Convert.ToBase64String(data);
+            
+            //公钥验签
+            byte[] signBytes = System.Convert.FromBase64String(signRes);
+            var verify = entry_Rsa.VerifyData(entrData, signBytes, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+
+            Assert.Equal<string>("123", "123");
+        }
+        private bool CompareBytearrays(byte[] a, byte[] b)
+        {
+            if (a.Length != b.Length)
+                return false;
+            int i = 0;
+            foreach (byte c in a)
+            {
+                if (c != b[i])
+                    return false;
+                i++;
+            }
+            return true;
+        }
+        private int GetIntegerSize(BinaryReader binr)
+        {
+            byte bt = 0;
+            int count = 0;
+            bt = binr.ReadByte();
+            if (bt != 0x02)
+                return 0;
+            bt = binr.ReadByte();
+
+            if (bt == 0x81)
+                count = binr.ReadByte();
+            else
+            if (bt == 0x82)
+            {
+                var highbyte = binr.ReadByte();
+                var lowbyte = binr.ReadByte();
+                byte[] modint = { lowbyte, highbyte, 0x00, 0x00 };
+                count = BitConverter.ToInt32(modint, 0);
+            }
+            else
+            {
+                count = bt;
+            }
+
+            while (binr.ReadByte() == 0x00)
+            {
+                count -= 1;
+            }
+            binr.BaseStream.Seek(-1, SeekOrigin.Current);
+            return count;
+        }
         [Fact]
         public void TestBase64()
         {
@@ -53,6 +124,20 @@ namespace Util.Test
             Assert.Equal<string>("123", str);
         }
 
+        [Fact]
+        public async void TestWebClient()
+        {
+            var url = "https://management.chinacloudapi.cn/subscriptions/545bb669-844a-4a39-9a6b-fcf98e3af40a/resourceGroups/SharewinfoBI/providers//capacities/pbiemb?api-version=2017-10-01&force=true";
+            var webClient = new WebClient().Patch(url);
+            webClient.Data(new Dictionary<string, object>() {
+                { "sku", new Dictionary<string, object>(){
+                    {"name", "A1" }
+                } }
+            });
+
+            var s = await webClient.ResultAsync();
+
+        }
     }
     public class CalcConfig: Module, IConfig
     {

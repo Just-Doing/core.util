@@ -36,6 +36,14 @@ namespace Util.Webs.Clients {
         public IHttpRequest Delete( string url ) {
             return new HttpRequest( HttpMethod.Delete, url );
         }
+        /// <summary>
+        /// Patch请求
+        /// </summary>
+        /// <param name="url">地址</param>
+        public IHttpRequest Patch(string url)
+        {
+            return new HttpRequest(HttpMethod.Patch, url);
+        }
     }
 
     /// <summary>
