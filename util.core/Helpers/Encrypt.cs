@@ -91,7 +91,7 @@ namespace Util.Core.Helpers {
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥,24位</param>
         public static string DesEncrypt( object value, string key ) {
-            return DesEncrypt( value, GetBase64String(StringFillToLength(key,32, FillValue)), Encoding.UTF8 );
+            return DesEncrypt( value, GetBase64String(StringFillToLength(key,16, FillValue)), Encoding.UTF8 );
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Util.Core.Helpers {
         /// <param name="value">加密后的值</param>
         /// <param name="key">密钥,24位</param>
         public static string DesDecrypt( object value, string key ) {
-            return DesDecrypt( value, key, Encoding.UTF8 );
+            return DesDecrypt( value, GetBase64String(StringFillToLength(key, 16, FillValue)), Encoding.UTF8 );
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Util.Core.Helpers {
             byte[] ivBytes = Encoding.UTF8.GetBytes(StringFillToLength(key, 16, FillValue));
 
             return new RijndaelManaged {
-                Key = System.Convert.FromBase64String(GetBase64String(StringFillToLength(key, 32, FillValue))),
+                Key = System.Convert.FromBase64String(GetBase64String(StringFillToLength(key, 16, FillValue))),
 
                 Mode = CipherMode.CBC,
                 Padding = PaddingMode.PKCS7,

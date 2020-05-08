@@ -65,7 +65,6 @@ public class TestRsaEntry {
     
     public static PublicKey GetPubkey() throws CertificateException, FileNotFoundException
     {
-   
         File certFile = new File("D:\\\\cert\\\\taikang_public.crt");
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
         X509Certificate cert = (X509Certificate)cf.generateCertificate(new FileInputStream(certFile));
