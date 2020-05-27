@@ -11,7 +11,7 @@ namespace Rsa_javascript_csharp
     /// <summary>
     /// AJax提交参数加密帮助类
     /// </summary>
-    public class JsEncryptHelper
+    public class Rsa_Js_CSharp
     {
         private const string defaultprivateKey = @"MIICXAIBAAKBgQCC0hrRIjb3noDWNtbDpANbjt5Iwu2NFeDwU16Ec87ToqeoIm2K
 I+cOs81JP9aTDk/jkAlU97mN8wZkEMDr5utAZtMVht7GLX33Wx9XjqxUsDfsGkqN
@@ -35,7 +35,7 @@ GjdnSp9PTfFDBY133QIDAQAB";
         private RSACryptoServiceProvider _privateKeyRsaProvider;
         private RSACryptoServiceProvider _publicKeyRsaProvider;
 
-        public JsEncryptHelper(string privateKey = "", string publicKey = "")
+        public Rsa_Js_CSharp(string privateKey = "", string publicKey = "")
         {
 
             if (string.IsNullOrEmpty(privateKey))

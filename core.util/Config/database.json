@@ -653,5 +653,26 @@
         "eg": "Util.Core.Helpers.Regex.IsMatch(string input, string pattern, RegexOptions options = RegexOptions.IgnoreCase)"
       }
     ]
+  },
+  {
+    "title": "Rsa_Js_CSharp",
+    "content": [
+      {
+        "nvTitle": "Decrypt",
+        "name": " Decrypt(string cipherText)",
+        "dec": "解密前端js RSA 加密后传来的字符串",
+        "para": "Decrypt(\"bmhbeXAk..h/c=\")",
+        "ret": "string",
+        "eg": "Rsa_Js_CSharp.Decrypt('bmhbeXAk1MbCk2OMsfJh56FQ3TNgeEKeaPt41MYpqBuZKZkosX6opo2Y+xr0iNFk2/j6MTc1JZh8KUrnMUVfeW1Z19t6W+p+knR1PSItVVjtoLQhA0jIwrK/4aFIEQaLtznQ0R6xWql9+CCgMCkZADefpIiNBE+ZeBgv5Tefh/c=')"
+      },
+      {
+        "nvTitle": "Encrypt",
+        "name": " Encrypt(string cipherText)",
+        "dec": "RSA 加密",
+        "para": "Encrypt(\"test\")",
+        "ret": "string",
+        "eg": "Rsa_Js_CSharp.Encrypt('test')"
+      }
+    ]
   }
 ]
