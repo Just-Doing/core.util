@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using util.core.Helpers;
 using Util.Core.Helpers;
 using Util.Dependency;
+using WeChatMVC.Common;
 
 namespace core.util.Controllers
 {
@@ -37,8 +38,11 @@ namespace core.util.Controllers
             var s = f(2);
 
             var s1 = MachineCode.GetMachineCodeString();
-            var s2 = Encrypt.AesEncrypt(s1, "1qaz!QAZ");
-            var s3 = Encrypt.AesDecrypt("GDKxvgeFIldacXK91rSU+9/qh8iKNBdGjiNbBJ60KFF1KJ6BzGBSqjbrafAvli72mxf3ffQA4p9qKdXBaSG7cg==", "1qaz!QAQ");
+            
+            WeChatMVC.Common.JsEncryptHelper jsHelper = new JsEncryptHelper();
+
+           var a = jsHelper.Decrypt("by3XLCAMt+1dAldQJWNvDnRLNGVVdtuGpq+qgbv11I9QwVo9f5hXp5evrRKx32OSpYCAhCGbUgHYLKi5aHMthkG/Q4/uwWjpjFvIpXSbGIFyybf7Sb5rVmRYX+kel3Sw6MhygkgCvAMrS+9xNU0hxuiPO89ZlnWvaChic90LXqw=");
+
             ViewBag.machinecode = s1;
             return View();
         }

@@ -1,9 +1,0 @@
-D:\git\core.util\util.core\bin\Release\netcoreapp2.1\util.core.deps.json
-D:\git\core.util\util.core\bin\Release\netcoreapp2.1\util.core.dll
-D:\git\core.util\util.core\bin\Release\netcoreapp2.1\util.core.pdb
-D:\git\core.util\util.core\obj\Release\netcoreapp2.1\util.core.csprojAssemblyReference.cache
-D:\git\core.util\util.core\obj\Release\netcoreapp2.1\util.core.csproj.CoreCompileInputs.cache
-D:\git\core.util\util.core\obj\Release\netcoreapp2.1\util.core.AssemblyInfoInputs.cache
-D:\git\core.util\util.core\obj\Release\netcoreapp2.1\util.core.AssemblyInfo.cs
-D:\git\core.util\util.core\obj\Release\netcoreapp2.1\util.core.dll
-D:\git\core.util\util.core\obj\Release\netcoreapp2.1\util.core.pdb
