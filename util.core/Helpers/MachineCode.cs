@@ -7,9 +7,7 @@ namespace util.core.Helpers
 {
     public class MachineCode
     {
-
         static MachineCode machineCode;
-
         public static string GetMachineCodeString()
         {
             string machineCodeString = string.Empty;

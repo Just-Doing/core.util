@@ -38,11 +38,6 @@ namespace core.util.Controllers
             var s = f(2);
 
             var s1 = MachineCode.GetMachineCodeString();
-            
-            WeChatMVC.Common.JsEncryptHelper jsHelper = new JsEncryptHelper();
-
-           var a = jsHelper.Decrypt("by3XLCAMt+1dAldQJWNvDnRLNGVVdtuGpq+qgbv11I9QwVo9f5hXp5evrRKx32OSpYCAhCGbUgHYLKi5aHMthkG/Q4/uwWjpjFvIpXSbGIFyybf7Sb5rVmRYX+kel3Sw6MhygkgCvAMrS+9xNU0hxuiPO89ZlnWvaChic90LXqw=");
-
             ViewBag.machinecode = s1;
             return View();
         }
