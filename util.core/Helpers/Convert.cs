@@ -1,36 +1,44 @@
-﻿using System;
+﻿using Sharewinfo.Plugin.Utils.Extension;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
-namespace Util.Core.Helpers {
+namespace Sharewinfo.Plugin.Utils
+{
     /// <summary>
     /// 类型转换
     /// </summary>
-    public static class Convert {
+    public static class Convert
+    {
         /// <summary>
         /// 转换为32位整型
         /// </summary>
         /// <param name="input">输入值</param>
-        public static int ToInt( object input ) {
-            return ToIntOrNull( input ) ?? 0;
+        public static int ToInt(object input)
+        {
+            return ToIntOrNull(input) ?? 0;
         }
 
         /// <summary>
         /// 转换为32位可空整型
         /// </summary>
         /// <param name="input">输入值</param>
-        public static int? ToIntOrNull( object input ) {
-            var success = int.TryParse( input.SafeString(), out var result );
-            if( success )
+        public static int? ToIntOrNull(object input)
+        {
+            var success = int.TryParse(input.SafeString(), out var result);
+            if (success)
                 return result;
-            try {
-                var temp = ToDoubleOrNull( input, 0 );
-                if( temp == null )
+            try
+            {
+                var temp = ToDoubleOrNull(input, 0);
+                if (temp == null)
                     return null;
-                return System.Convert.ToInt32( temp );
+                return System.Convert.ToInt32(temp);
             }
-            catch {
+            catch
+            {
                 return null;
             }
         }
@@ -39,25 +47,29 @@ namespace Util.Core.Helpers {
         /// 转换为64位整型
         /// </summary>
         /// <param name="input">输入值</param>
-        public static long ToLong( object input ) {
-            return ToLongOrNull( input ) ?? 0;
+        public static long ToLong(object input)
+        {
+            return ToLongOrNull(input) ?? 0;
         }
 
         /// <summary>
         /// 转换为64位可空整型
         /// </summary>
         /// <param name="input">输入值</param>
-        public static long? ToLongOrNull( object input ) {
-            var success = long.TryParse( input.SafeString(), out var result );
-            if( success )
+        public static long? ToLongOrNull(object input)
+        {
+            var success = long.TryParse(input.SafeString(), out var result);
+            if (success)
                 return result;
-            try {
-                var temp = ToDecimalOrNull( input, 0 );
-                if( temp == null )
+            try
+            {
+                var temp = ToDecimalOrNull(input, 0);
+                if (temp == null)
                     return null;
-                return System.Convert.ToInt64( temp );
+                return System.Convert.ToInt64(temp);
             }
-            catch {
+            catch
+            {
                 return null;
             }
         }
@@ -67,8 +79,9 @@ namespace Util.Core.Helpers {
         /// </summary>
         /// <param name="input">输入值</param>
         /// <param name="digits">小数位数</param>
-        public static float ToFloat( object input, int? digits = null ) {
-            return ToFloatOrNull( input, digits ) ?? 0;
+        public static float ToFloat(object input, int? digits = null)
+        {
+            return ToFloatOrNull(input, digits) ?? 0;
         }
 
         /// <summary>
@@ -76,13 +89,14 @@ namespace Util.Core.Helpers {
         /// </summary>
         /// <param name="input">输入值</param>
         /// <param name="digits">小数位数</param>
-        public static float? ToFloatOrNull( object input, int? digits = null ) {
-            var success = float.TryParse( input.SafeString(), out var result );
-            if( !success )
+        public static float? ToFloatOrNull(object input, int? digits = null)
+        {
+            var success = float.TryParse(input.SafeString(), out var result);
+            if (!success)
                 return null;
-            if( digits == null )
+            if (digits == null)
                 return result;
-            return (float)Math.Round( result, digits.Value );
+            return (float)Math.Round(result, digits.Value);
         }
 
         /// <summary>
@@ -90,8 +104,9 @@ namespace Util.Core.Helpers {
         /// </summary>
         /// <param name="input">输入值</param>
         /// <param name="digits">小数位数</param>
-        public static double ToDouble( object input, int? digits = null ) {
-            return ToDoubleOrNull( input, digits ) ?? 0;
+        public static double ToDouble(object input, int? digits = null)
+        {
+            return ToDoubleOrNull(input, digits) ?? 0;
         }
 
         /// <summary>
@@ -99,13 +114,14 @@ namespace Util.Core.Helpers {
         /// </summary>
         /// <param name="input">输入值</param>
         /// <param name="digits">小数位数</param>
-        public static double? ToDoubleOrNull( object input, int? digits = null ) {
-            var success = double.TryParse( input.SafeString(), out var result );
-            if( !success )
+        public static double? ToDoubleOrNull(object input, int? digits = null)
+        {
+            var success = double.TryParse(input.SafeString(), out var result);
+            if (!success)
                 return null;
-            if( digits == null )
+            if (digits == null)
                 return result;
-            return Math.Round( result, digits.Value );
+            return Math.Round(result, digits.Value);
         }
 
         /// <summary>
@@ -113,8 +129,9 @@ namespace Util.Core.Helpers {
         /// </summary>
         /// <param name="input">输入值</param>
         /// <param name="digits">小数位数</param>
-        public static decimal ToDecimal( object input, int? digits = null ) {
-            return ToDecimalOrNull( input, digits ) ?? 0;
+        public static decimal ToDecimal(object input, int? digits = null)
+        {
+            return ToDecimalOrNull(input, digits) ?? 0;
         }
 
         /// <summary>
@@ -122,39 +139,44 @@ namespace Util.Core.Helpers {
         /// </summary>
         /// <param name="input">输入值</param>
         /// <param name="digits">小数位数</param>
-        public static decimal? ToDecimalOrNull( object input, int? digits = null ) {
-            var success = decimal.TryParse( input.SafeString(), out var result );
-            if( !success )
+        public static decimal? ToDecimalOrNull(object input, int? digits = null)
+        {
+            var success = decimal.TryParse(input.SafeString(), out var result);
+            if (!success)
                 return null;
-            if( digits == null )
+            if (digits == null)
                 return result;
-            return Math.Round( result, digits.Value );
+            return Math.Round(result, digits.Value);
         }
 
         /// <summary>
         /// 转换为布尔值
         /// </summary>
         /// <param name="input">输入值</param>
-        public static bool ToBool( object input ) {
-            return ToBoolOrNull( input ) ?? false;
+        public static bool ToBool(object input)
+        {
+            return ToBoolOrNull(input) ?? false;
         }
 
         /// <summary>
         /// 转换为可空布尔值
         /// </summary>
         /// <param name="input">输入值</param>
-        public static bool? ToBoolOrNull( object input ) {
-            bool? value = GetBool( input );
-            if( value != null )
+        public static bool? ToBoolOrNull(object input)
+        {
+            bool? value = GetBool(input);
+            if (value != null)
                 return value.Value;
-            return bool.TryParse( input.SafeString(), out var result ) ? (bool?)result : null;
+            return bool.TryParse(input.SafeString(), out var result) ? (bool?)result : null;
         }
 
         /// <summary>
         /// 获取布尔值
         /// </summary>
-        private static bool? GetBool( object input ) {
-            switch( input.SafeString().ToLower() ) {
+        private static bool? GetBool(object input)
+        {
+            switch (input.SafeString().ToLower())
+            {
                 case "0":
                     return false;
                 case "否":
@@ -182,40 +204,45 @@ namespace Util.Core.Helpers {
         /// 转换为日期
         /// </summary>
         /// <param name="input">输入值</param>
-        public static DateTime ToDate( object input ) {
-            return ToDateOrNull( input ) ?? DateTime.MinValue;
+        public static DateTime ToDate(object input)
+        {
+            return ToDateOrNull(input) ?? DateTime.MinValue;
         }
 
         /// <summary>
         /// 转换为可空日期
         /// </summary>
         /// <param name="input">输入值</param>
-        public static DateTime? ToDateOrNull( object input ) {
-            return DateTime.TryParse( input.SafeString(), out var result ) ? (DateTime?)result : null;
+        public static DateTime? ToDateOrNull(object input)
+        {
+            return DateTime.TryParse(input.SafeString(), out var result) ? (DateTime?)result : null;
         }
 
         /// <summary>
         /// 转换为Guid
         /// </summary>
         /// <param name="input">输入值</param>
-        public static Guid ToGuid( object input ) {
-            return ToGuidOrNull( input ) ?? Guid.Empty;
+        public static Guid ToGuid(object input)
+        {
+            return ToGuidOrNull(input) ?? Guid.Empty;
         }
 
         /// <summary>
         /// 转换为可空Guid
         /// </summary>
         /// <param name="input">输入值</param>
-        public static Guid? ToGuidOrNull( object input ) {
-            return Guid.TryParse( input.SafeString(), out var result ) ? (Guid?)result : null;
+        public static Guid? ToGuidOrNull(object input)
+        {
+            return Guid.TryParse(input.SafeString(), out var result) ? (Guid?)result : null;
         }
 
         /// <summary>
         /// 转换为Guid集合
         /// </summary>
         /// <param name="input">以逗号分隔的Guid集合字符串，范例:83B0233C-A24F-49FD-8083-1337209EBC9A,EAB523C6-2FE7-47BE-89D5-C6D440C3033A</param>
-        public static List<Guid> ToGuidList( string input ) {
-            return ToList<Guid>( input );
+        public static List<Guid> ToGuidList(string input)
+        {
+            return ToList<Guid>(input);
         }
 
         /// <summary>
@@ -223,12 +250,13 @@ namespace Util.Core.Helpers {
         /// </summary>
         /// <typeparam name="T">目标元素类型</typeparam>
         /// <param name="input">以逗号分隔的元素集合字符串，范例:83B0233C-A24F-49FD-8083-1337209EBC9A,EAB523C6-2FE7-47BE-89D5-C6D440C3033A</param>
-        public static List<T> ToList<T>( string input ) {
+        public static List<T> ToList<T>(string input)
+        {
             var result = new List<T>();
-            if( string.IsNullOrWhiteSpace( input ) )
+            if (string.IsNullOrWhiteSpace(input))
                 return result;
-            var array = input.Split( ',' );
-            result.AddRange( from each in array where !string.IsNullOrWhiteSpace( each ) select To<T>( each ) );
+            var array = input.Split(',');
+            result.AddRange(from each in array where !string.IsNullOrWhiteSpace(each) select To<T>(each));
             return result;
         }
 
@@ -237,35 +265,81 @@ namespace Util.Core.Helpers {
         /// </summary>
         /// <typeparam name="T">目标类型</typeparam>
         /// <param name="input">输入值</param>
-        public static T To<T>( object input ) {
-            if( input == null )
-                return default( T );
-            if( input is string && string.IsNullOrWhiteSpace( input.ToString() ) )
-                return default( T );
+        public static T To<T>(object input)
+        {
+            if (input == null)
+                return default(T);
+            if (input is string && string.IsNullOrWhiteSpace(input.ToString()))
+                return default(T);
             Type type = Common.GetType<T>();
             var typeName = type.Name.ToLower();
-            try {
-                if( typeName == "string" )
+            try
+            {
+                if (typeName == "string")
                     return (T)(object)input.ToString();
-                if( typeName == "guid" )
-                    return (T)(object)new Guid( input.ToString() );
-                if( type.IsEnum )
-                    return Enum.Parse<T>( input );
-                if( input is IConvertible )
-                    return (T)System.Convert.ChangeType( input, type );
-                return (T)input;
+                if (typeName == "guid")
+                    return (T)(object)new Guid(input.ToString());
+                if (type.IsEnum)
+                    return Enum.Parse<T>(input.SafeString());
+                if (input is IConvertible)
+                    return (T)System.Convert.ChangeType(input, type);
+                return ConvertToModel<T>(input);
             }
-            catch {
-                return default( T );
+            catch
+            {
+                return default(T);
             }
+        }
+
+        public static T2 ConvertToModel<T2>(object input)
+        {
+            T2 model = default(T2);
+            PropertyInfo[] pi = typeof(T2).GetProperties();
+            PropertyInfo[] pi1 = input.GetType().GetProperties();
+            model = Activator.CreateInstance<T2>();
+            foreach (var p in pi)
+            {
+                foreach (var p1 in pi1)
+                {
+                    if (p.Name == p1.Name)
+                    {
+                        var value = p1.GetValue(input, null);
+                        try
+                        {
+                            switch (p.PropertyType.Name.ToLower())
+                            {
+                                case "string":
+                                    p.SetValue(model, value?.ToString(), null);
+                                    break;
+                                case "guid":
+                                    p.SetValue(model, new Guid(value.ToString()), null);
+                                    break;
+                                case "boolean":
+                                    p.SetValue(model, Boolean.Parse(value.ToString()), null);
+                                    break;
+                                case "int32":
+                                    p.SetValue(model, Int32.Parse(value.ToString()), null);
+                                    break;
+                                default:
+                                    p.SetValue(model, value?.ToString(), null);
+                                    break;
+                            }
+                            break;
+                        }
+                        catch (Exception) { }
+                    }
+                }
+            }
+            return model;
         }
 
         /// <summary>
         /// 转换为字节数组
         /// </summary>
         /// <param name="input">输入值</param>        
-        public static byte[] ToBytes( string input ) {
-            return ToBytes( input, Encoding.UTF8 );
+        public static byte[] ToBytes(string input)
+        {
+            return ToBytes(input, Encoding.UTF8);
         }
 
         /// <summary>
@@ -273,8 +347,9 @@ namespace Util.Core.Helpers {
         /// </summary>
         /// <param name="input">输入值</param>
         /// <param name="encoding">字符编码</param>
-        public static byte[] ToBytes( string input, Encoding encoding ) {
-            return string.IsNullOrWhiteSpace( input ) ? new byte[] { } : encoding.GetBytes( input );
+        public static byte[] ToBytes(string input, Encoding encoding)
+        {
+            return string.IsNullOrWhiteSpace(input) ? new byte[] { } : encoding.GetBytes(input);
         }
     }
 }
