@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "util.core", "util.core\util.core.csproj", "{24DAB4D1-E36E-4F79-BDB6-39B11C4D98DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sharewinfo.util", "util.core\sharewinfo.util.csproj", "{24DAB4D1-E36E-4F79-BDB6-39B11C4D98DD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core.util", "core.util\core.util.csproj", "{E77E95DC-2B06-4F1C-A3AA-98F4FFE5C661}"
 EndProject

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\util.core\util.core.csproj" />
+    <ProjectReference Include="..\util.core\sharewinfo.util.csproj" />
   </ItemGroup>
 
   <ItemGroup>

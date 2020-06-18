@@ -3,6 +3,7 @@ using Autofac.Core;
 using CMCloud.SaaS;
 using core.util.IocTest;
 using System;
+using util.core.rsa_java_csharp;
 using Util.Core.Helpers;
 using Util.Dependency;
 using Xunit;
@@ -22,7 +23,14 @@ namespace Util.Test
             Assert.Equal<int>(7, 8);
 
         }
+[Fact]
+        public void DectryTest1()
+        {
+            var s = new Rsa_CSharp().EncryptString("test");
+            //var s1 = new Rsa_CSharp().DecryptString("test");
+            Assert.Equal<int>(7, 8);
 
+        }
     }
     
 }

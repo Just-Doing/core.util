@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+	 <!--<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	 <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <Authors>NicolYang</Authors>
+	  <Company>Sharewinfo</Company>
+	  <Description>Sharewinfo-Utils</Description>
+	  <Version>1.0.0</Version>-->
   </PropertyGroup>
 
   <ItemGroup>

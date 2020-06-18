@@ -1,11 +1,12 @@
-﻿using Sharewinfo.Plugin.Utils.Extension;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Util.Core;
 
-namespace Sharewinfo.Plugin.Utils
+namespace Util.Core.Helpers
 {
     /// <summary>
     /// 类型转换
