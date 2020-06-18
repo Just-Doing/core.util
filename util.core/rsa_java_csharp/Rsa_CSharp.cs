@@ -44,15 +44,13 @@ namespace util.core.rsa_java_csharp
 
         public string DecryptString(string inputStr)
         {
-            var decryData = System.Convert.FromBase64String(inputStr);
-            string privateFname = "D:\\cert\\taikang_private.pfx";
-            //string privateFname = System.Web.HttpContext.Current.Server.MapPath("cert/taikang_public.pfx");
+            var encryByt = System.Convert.FromBase64String(inputStr);
+            string privateFname = @"D:\cert\taikang_private.pfx";
             X509Certificate2 prvcrt = new X509Certificate2(privateFname, "1qaz!QAZ", X509KeyStorageFlags.Exportable);
-            RSACryptoServiceProvider decry_Rsa = new RSACryptoServiceProvider();
-
-            decry_Rsa.FromXmlString(prvcrt.PrivateKey.ToXmlString(true));
-            var decryRes = decry_Rsa.Decrypt(decryData, false);
+            RSA decry_Rsa = prvcrt.GetRSAPrivateKey();
+            var decryRes = decry_Rsa.Decrypt(encryByt, RSAEncryptionPadding.Pkcs1);
             var res = System.Text.Encoding.UTF8.GetString(decryRes);
+
             return res;
         }
     }

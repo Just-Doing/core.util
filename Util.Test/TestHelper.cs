@@ -45,20 +45,21 @@ namespace Util.Test
 
             //公钥加密
             RSACryptoServiceProvider entry_Rsa = new RSACryptoServiceProvider();
-            string fname = @"D:\cert\public_test.crt";
+            string fname = @"D:\cert\taikang_public.crt";
             X509Certificate2 pubCert = new X509Certificate2(fname);
             var keyPara = pubCert.GetRSAPublicKey();
             var para = keyPara.ExportParameters(false);
             entry_Rsa.ImportParameters(para);
             var encryptedData = entry_Rsa.Encrypt(entrData, false);
             var base64Str = System.Convert.ToBase64String(encryptedData);// 需要base64 加密返回
-            
+
 
             //私钥解密
-            string privateFname = @"D:\cert\private_test.pfx";
+            var encryByt = System.Convert.FromBase64String(base64Str);
+            string privateFname = @"D:\cert\taikang_private.pfx";
             X509Certificate2 prvcrt = new X509Certificate2(privateFname, "1qaz!QAZ", X509KeyStorageFlags.Exportable);
             RSA decry_Rsa = prvcrt.GetRSAPrivateKey() ;
-            var decryRes = decry_Rsa.Decrypt(encryptedData, RSAEncryptionPadding.Pkcs1);
+            var decryRes = decry_Rsa.Decrypt(encryByt, RSAEncryptionPadding.Pkcs1);
             var res = System.Text.Encoding.UTF8.GetString(decryRes);
 
 

@@ -27,7 +27,7 @@ namespace Util.Test
         public void DectryTest1()
         {
             var s = new Rsa_CSharp().EncryptString("test");
-            //var s1 = new Rsa_CSharp().DecryptString("test");
+            var s1 = new Rsa_CSharp().DecryptString(s);
             Assert.Equal<int>(7, 8);
 
         }
