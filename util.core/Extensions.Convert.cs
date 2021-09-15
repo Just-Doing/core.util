@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace Util.Core
 {
@@ -157,5 +159,39 @@ namespace Util.Core
             return base64Str;
         }
 
+        /// <summary>
+        /// 转换为MD5 字符串
+        /// </summary>
+        /// <param name="obj">字符串</param>
+        public static string ToMd5(this string input)
+        {
+            using (var md5 = MD5.Create())
+            {
+                var result = md5.ComputeHash(System.Text.Encoding.ASCII.GetBytes(input));
+                var strResult = System.BitConverter.ToString(result);
+                return strResult.Replace("-", "");
+            }
+        }
+
+        /// <summary>
+        /// 转换为MD5 字符串
+        /// </summary>
+        /// <param name="obj">字符串</param>
+        public static string GetBase64(this string input)
+        {
+            var bat = System.Convert.FromBase64String(input);
+            var str = System.Text.Encoding.UTF8.GetString(bat);
+            return str;
+        }
+
+
+        /// <summary>
+        /// 去特殊字符
+        /// </summary>
+        /// <param name="input">字符串</param>
+        public static string DeleteSymbol(this string input)
+        {
+            return new Regex("[!@#$%^&*()（）【】{}￥]", RegexOptions.IgnoreCase).Replace(input, "");
+        }
     }
 }
