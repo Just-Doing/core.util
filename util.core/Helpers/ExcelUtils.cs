@@ -41,6 +41,10 @@ namespace SmartCribms.Common
         public string ColumnName { get; set; }
         public string FiledName { get; set; }
     }
+    public enum ExcelType { 
+        Excel2003=0,
+        Excel2007 = 1
+    }
     public class ExcelUtils
     {
         /// <summary>
@@ -386,88 +390,104 @@ namespace SmartCribms.Common
         {
             using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
-                IWorkbook workbook = null;
-                try
+                if (filePath.EndsWith(".xlsx")) // 2007+
+                   return ExcelToDataTableFromStream(fs, ExcelType.Excel2007, firstRowToColumn);
+                else if (filePath.EndsWith(".xls")) // 2003
+                    return ExcelToDataTableFromStream(fs, ExcelType.Excel2003, firstRowToColumn);
+                return null;
+            }
+        }
+        /// <summary>
+        /// 根据stream 获取 excel 数据
+        /// </summary>
+        /// <param name="fs"></param>
+        /// <param name="tyle"></param>
+        /// <param name="firstRowToColumn"></param>
+        /// <returns></returns>
+        public static DataSet ExcelToDataTableFromStream(Stream fs, ExcelType tyle, bool firstRowToColumn)
+        {
+            IWorkbook workbook = null;
+            try
+            {
+                if (tyle == ExcelType.Excel2007) // 2007+
+                    workbook = new XSSFWorkbook(fs);
+                else if (tyle == ExcelType.Excel2003) // 2003
+                    workbook = new HSSFWorkbook(fs);
+                var ds = new DataSet();
+                for (var i = 0; null != workbook && i < workbook.NumberOfSheets; i++)
                 {
-                    var ds = new DataSet();
-                    if (filePath.EndsWith(".xlsx")) // 2007+
-                        workbook = new XSSFWorkbook(fs);
-                    else if (filePath.EndsWith(".xls")) // 2003
-                        workbook = new HSSFWorkbook(fs);
-                    for (var i = 0; null != workbook && i < workbook.NumberOfSheets; i++)
-                    {
-                        var dt = new DataTable { TableName = workbook.GetSheetName(i) };
-                        var sheet = workbook.GetSheetAt(i);
+                    var dt = new DataTable { TableName = workbook.GetSheetName(i) };
+                    var sheet = workbook.GetSheetAt(i);
 
-                        
-                        var e = new XSSFFormulaEvaluator(workbook);
-                        var firstRow = sheet.GetRow(0);
-                        if (null!= firstRow)
+
+                    var e = new XSSFFormulaEvaluator(workbook);
+                    var firstRow = sheet.GetRow(0);
+                    if (null != firstRow)
+                    {
+                        var headerMaxIndex = firstRow.LastCellNum;
+                        // 如果 首行为表头，以表头为准，否则以最大列数为准
+                        var readMaxColumn = headerMaxIndex;
+                        for (var j = 0; j < readMaxColumn; j++)//write column to Table
                         {
-                            var headerMaxIndex = firstRow.LastCellNum;
-                            // 如果 首行为表头，以表头为准，否则以最大列数为准
-                            var readMaxColumn = headerMaxIndex;
-                            for (var j = 0; j < readMaxColumn; j++)//write column to Table
+                            var r = sheet.GetRow(0);
+                            dt.Columns.Add(firstRowToColumn ? r.GetCell(j).ToString() : j.ToString());
+                        }
+                        var startIndex = firstRowToColumn ? 1 : 0;
+                        for (var j = startIndex; j <= sheet.LastRowNum; j++)//write row to Table
+                        {
+                            var r = sheet.GetRow(j);
+                            if (null == r) continue;
+                            var dr = dt.NewRow();
+                            var haveCellIsNotNull = false;
+                            for (var rn = 0; rn < readMaxColumn; rn++)
                             {
-                                var r = sheet.GetRow(0);
-                                dt.Columns.Add(firstRowToColumn ? r.GetCell(j).ToString() : j.ToString());
-                            }
-                            var startIndex = firstRowToColumn ? 1 : 0;
-                            for (var j = startIndex; j <= sheet.LastRowNum; j++)//write row to Table
-                            {
-                                var r = sheet.GetRow(j);
-                                if (null == r) continue;
-                                var dr = dt.NewRow();
-                                var haveCellIsNotNull = false;
-                                for (var rn = 0; rn < readMaxColumn; rn++)
+                                var cell = r.GetCell(rn);
+                                if (cell == null)
                                 {
-                                    var cell = r.GetCell(rn);
-                                    if (cell == null)
+                                    dr[rn] = null;
+                                }
+                                else
+                                {
+                                    if (cell.CellType == CellType.Formula)
                                     {
-                                        dr[rn] = null;
-                                    }
-                                    else
-                                    {
-                                        if (cell.CellType == CellType.Formula)
+                                        var v = "";
+                                        if (cell.CachedFormulaResultType.ToString() == "Error")
                                         {
-                                            var v = "";
-                                            if (cell.CachedFormulaResultType.ToString() == "Error")
-                                            {
-                                                throw new Exception("文档中含有表达式计算错误的情况，请更正后上传！");
-                                            }
-                                            if (cell.CachedFormulaResultType.ToString() == "Numeric")
-                                            {
-                                                v = cell.NumericCellValue.ToString();
-                                            }
-                                            else
-                                            {
-                                                v = cell.RichStringCellValue.ToString();
-                                            }
-                                            haveCellIsNotNull = v.Length > 0;
-                                            dr[rn] = v;
+                                            throw new Exception("文档中含有表达式计算错误的情况，请更正后上传！");
+                                        }
+                                        if (cell.CachedFormulaResultType.ToString() == "Numeric")
+                                        {
+                                            v = cell.NumericCellValue.ToString();
                                         }
                                         else
                                         {
-                                            var v = cell.ToString();
-                                            dr[rn] = v;
-                                            haveCellIsNotNull = haveCellIsNotNull || v.Length > 0;
+                                            v = cell.RichStringCellValue.ToString();
                                         }
+                                        haveCellIsNotNull = v.Length > 0;
+                                        dr[rn] = v;
+                                    }
+                                    else
+                                    {
+                                        var v = cell.ToString();
+                                        dr[rn] = v;
+                                        haveCellIsNotNull = haveCellIsNotNull || v.Length > 0;
                                     }
                                 }
-                                if(haveCellIsNotNull)
-                                    dt.Rows.Add(dr);
                             }
-                            ds.Tables.Add(dt);
+                            if (haveCellIsNotNull)
+                                dt.Rows.Add(dr);
                         }
+                        ds.Tables.Add(dt);
                     }
-                    return ds;
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
+
 
     }
 }

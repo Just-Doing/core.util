@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.1.0</Version>
+    <Version>1.1.2</Version>
 	 <!--<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	 <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <Authors>NicolYang</Authors>
@@ -19,6 +19,7 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
     <PackageReference Include="IdentityModel" Version="3.10.5" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Novell.Directory.Ldap.NETStandard" Version="3.6.0" />
     <PackageReference Include="NPOI" Version="2.4.1" />
     <PackageReference Include="System.Management" Version="4.5.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />

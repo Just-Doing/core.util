@@ -53,5 +53,18 @@ namespace Util.Core
                 return true;
             return !value.Any();
         }
+
+        /// <summary>
+        /// 判断是否是图片 文件名
+        /// </summary>
+        /// <param name="value">值</param>
+        public static bool IsImgName(this string value)
+        {
+            if (value == null)
+                return false;
+            var fileExtendsName = value.Substring(value.LastIndexOf(".") + 1).ToLower();
+            return ".png,.jpg,.jpeg,.bmp".IndexOf(fileExtendsName) > -1;
+        }
+
     }
 }
