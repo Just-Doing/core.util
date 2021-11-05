@@ -2,9 +2,11 @@
 using Autofac.Core;
 using core.util.IocTest;
 using Newtonsoft.Json;
+using Sharewinfo.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -138,6 +140,56 @@ namespace Util.Test
 
             var s = await webClient.ResultAsync();
 
+        }
+
+
+        [Fact]
+        public void TestExportExcel()
+        {
+
+            var ds = new DataSet();
+            var dt = new DataTable("table1");
+            dt.Columns.Add(new DataColumn("name"));
+            dt.Columns.Add(new DataColumn("age"));
+            var dr = dt.NewRow();
+            dr["name"] = "nicol";
+            dr["age"] = 18;
+            var dr1 = dt.NewRow();
+            dr1["name"] = "nicol11111111111";
+            dr1["age"] = 20;
+            dt.Rows.Add(dr);
+            dt.Rows.Add(dr1);
+            ds.Tables.Add(dt);
+
+            var dt2 = new DataTable("table2");
+            dt2.Columns.Add(new DataColumn("name2"));
+            dt2.Columns.Add(new DataColumn("age2"));
+            var dr3 = dt2.NewRow();
+            dr3["name2"] = "nicol333333333";
+            dr3["age2"] = 18;
+            var dr4 = dt2.NewRow();
+            dr4["name2"] = "nico222222";
+            dr4["age2"] = 20;
+            dt2.Rows.Add(dr3);
+            dt2.Rows.Add(dr4);
+            ds.Tables.Add(dt2);
+            Dictionary<string, List<ExcelColumn>> dc = new Dictionary<string, List<ExcelColumn>>();
+            dc.Add("table1", new List<ExcelColumn>() {
+                new ExcelColumn("名称", "name", 300),
+                new ExcelColumn("年龄", "age", 100)
+            });
+            dc.Add("table2", new List<ExcelColumn>() {
+                new ExcelColumn("名称222", "name2", 300),
+                new ExcelColumn("年龄222", "age2", 100)
+            });
+            var st = new ExcelUtils().GetStreamByData(ds, dc);
+            using (FileStream fs = new FileStream("d:/aaa.xlsx", FileMode.Create))
+            {
+                byte[] buffer = st.ToArray();//转化为byte格式存储
+                fs.Write(buffer, 0, buffer.Length);
+                fs.Flush();
+                buffer = null;
+            }
         }
     }
     public class CalcConfig: Module, IConfig

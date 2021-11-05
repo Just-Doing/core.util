@@ -10,7 +10,7 @@ using System.Data;
 using System.IO;
 
 
-namespace SmartCribms.Common
+namespace Sharewinfo.Util
 {
     public class ExcelColumn
     {
@@ -19,7 +19,7 @@ namespace SmartCribms.Common
         public string FieldName { get; set; }
         public string Type { get; set; } // 数字   时间
         public string Format { get; set; } // 格式化
-        public List<ExcelColumn> Children { get; set; }
+        public List<ExcelColumn> Children { get; set; }=new List<ExcelColumn>();
         public int Width
         {
             get
@@ -51,14 +51,17 @@ namespace SmartCribms.Common
         /// 根据datatable返回文件流
         /// </summary>
         /// <param name="ds"></param>
-        /// <param name="fs">可空</param>
         /// <returns></returns>
         public static MemoryStream GetStreamByData(DataSet ds)
         {
             try
             {
-                IWorkbook workbook = workbook = new HSSFWorkbook();
+                IWorkbook workbook = workbook = new XSSFWorkbook();
                 ISheet sheet = null;
+                if (ds.Tables.Count == 0)
+                {
+                    sheet = workbook.CreateSheet("sheet1");
+                }
                 foreach (DataTable dt in ds.Tables)
                 {
                     if (workbook != null)
@@ -93,17 +96,11 @@ namespace SmartCribms.Common
         /// </summary>
         /// <param name="ds"></param>
         /// <returns></returns>
-        public FileStream GetStreamByData(DataSet ds, Dictionary<string, List<ExcelColumn>> columns, string fileName)
+        public MemoryStream GetStreamByData(DataSet ds, Dictionary<string, List<ExcelColumn>> columns)
         {
-            var newFile = string.IsNullOrEmpty(fileName) ? Environment.CurrentDirectory + "/temp/" + Guid.NewGuid() + ".xlsx": fileName;
-            if (System.IO.File.Exists(newFile))
-                System.IO.File.Delete(newFile);
             var workbook = new XSSFWorkbook();
             ICellStyle style = workbook.CreateCellStyle();//创建样式对象
             style.VerticalAlignment = VerticalAlignment.Center;
-            IFont font = workbook.CreateFont(); //创建一个字体样式对象
-            font.FontHeight = 8;
-            font.FontName = "Arial"; //和excel里面的字体对应
             style.BorderLeft = BorderStyle.Thin;
             style.BorderRight = BorderStyle.Thin;
             style.BorderTop = BorderStyle.Thin;
@@ -112,7 +109,8 @@ namespace SmartCribms.Common
             style.TopBorderColor = HSSFColor.Grey50Percent.Index;
             style.LeftBorderColor = HSSFColor.Grey50Percent.Index;
             style.RightBorderColor = HSSFColor.Grey50Percent.Index;
-            style.SetFont(font); //将字体样式赋给样式对象
+           
+            MemoryStream ms = new MemoryStream();
             foreach (DataTable dt in ds.Tables)
             {
                 List<ExcelColumn> columnList = columns[dt.TableName];
@@ -122,18 +120,11 @@ namespace SmartCribms.Common
                     int bodyStartIndex = RenaderHeader(sheet, columnList, workbook, 0);
                     RenderBodyData(dt, sheet, columnList, workbook, style, bodyStartIndex);
                 }
-                using (FileStream outFs = new FileStream(newFile, FileMode.OpenOrCreate))
-                {
-                    workbook.Write(outFs);
-                }
+
             }
-            GC.Collect();
-            if (string.IsNullOrEmpty(fileName))
-            {
-                var fs = new FileStream(newFile, FileMode.Open);
-                return fs;
-            }
-            return null;
+
+            workbook.Write(ms);
+            return ms;
         }
 
         public void SetHeaderStyle(IWorkbook workbook, ICell cell)
@@ -142,8 +133,9 @@ namespace SmartCribms.Common
             style.Alignment = HorizontalAlignment.Center;
             style.VerticalAlignment = VerticalAlignment.Center;
             IFont font = workbook.CreateFont(); //创建一个字体样式对象
+            font.FontHeight = 20;
             font.FontName = "Arial"; //和excel里面的字体对应
-            font.Boldweight = short.MaxValue;//字体加粗
+            font.IsBold = true;//字体加粗
             style.SetFont(font); //将字体样式赋给样式对象
             cell.CellStyle = style; //把样式赋给单元格
         }
@@ -174,17 +166,12 @@ namespace SmartCribms.Common
         /// <param name="notices"></param>
         /// <param name="rowIndex"></param>
         /// <returns></returns>
-        public virtual int RenaderHeader(ISheet sheet, List<ExcelColumn> columnList, XSSFWorkbook workbook, int rowIndex)
+        public int RenaderHeader(ISheet sheet, List<ExcelColumn> columnList, XSSFWorkbook workbook, int rowIndex)
         {
             var lastRowIndex = rowIndex;
             var headerStartRowIndex = rowIndex ;// 如果有说明文本 则文本下会多一行空白、如果没有得去掉这空白行
-            var awaitMergedRegion = new List<int[]>(); // 记录待 合并的列（主要是合并列 左右的列 需要进行 行合并）
-            var cellIndex = RenderHeaderRow(columnList, sheet, workbook, ref rowIndex, ref lastRowIndex, 0, ref awaitMergedRegion);
+            var cellIndex = RenderHeaderRow(columnList, sheet, workbook, ref rowIndex, ref lastRowIndex, 0);
 
-            foreach (var cellPoint in awaitMergedRegion)
-            {
-                sheet.AddMergedRegion(new CellRangeAddress(cellPoint[0], lastRowIndex, cellPoint[1], cellPoint[1]));
-            }
            
             for (var i = headerStartRowIndex; i <= lastRowIndex; i++)
             {
@@ -201,7 +188,7 @@ namespace SmartCribms.Common
         /// <param name="rowIndex">行号</param>
         /// <param name="startCellIndex">开始 列号</param>
         /// <returns></returns>
-        public virtual int RenderHeaderRow(List<ExcelColumn> columnList, ISheet sheet, XSSFWorkbook workbook, ref int rowIndex, ref int lastRowIndex, int startCellIndex, ref List<int[]> awaitMergeCell)
+        public virtual int RenderHeaderRow(List<ExcelColumn> columnList, ISheet sheet, XSSFWorkbook workbook, ref int rowIndex, ref int lastRowIndex, int startCellIndex)
         {
             var childRow = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
             var cellIndex = startCellIndex; // 开始的列号
@@ -218,13 +205,12 @@ namespace SmartCribms.Common
                     rowIndex += 1;
                     lastRowIndex = rowIndex > lastRowIndex ? rowIndex : lastRowIndex;// 记录最深的层级
                     var orgCellIndex = cellIndex;
-                    cellIndex = RenderHeaderRow(children, sheet, workbook, ref rowIndex, ref lastRowIndex, cellIndex, ref awaitMergeCell);
+                    cellIndex = RenderHeaderRow(children, sheet, workbook, ref rowIndex, ref lastRowIndex, cellIndex);
                     sheet.AddMergedRegion(new CellRangeAddress(rowIndex - 1, rowIndex - 1, orgCellIndex, cellIndex - 1));
                     rowIndex -= 1;
                 }
                 else
                 {
-                    awaitMergeCell.Add(new int[] { rowIndex, cellIndex });
                     cellIndex++;
                 }
             }
@@ -250,10 +236,6 @@ namespace SmartCribms.Common
             ICellStyle noticeStyle = workbook.CreateCellStyle();//创建样式对象
             noticeStyle.FillForegroundColor = HSSFColor.White.Index;
             noticeStyle.FillPattern = FillPattern.SolidForeground;
-            IFont font = workbook.CreateFont(); //创建一个字体样式对象
-            font.FontName = "Arial"; //和excel里面的字体对应
-            font.FontHeight = 8;
-            noticeStyle.SetFont(font); //将字体样式赋给样式对象
             if (border)
             {
                 noticeStyle.Alignment = HorizontalAlignment.Center;
