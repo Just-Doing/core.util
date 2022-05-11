@@ -383,17 +383,17 @@ namespace Sharewinfo.Util
         /// 根据stream 获取 excel 数据
         /// </summary>
         /// <param name="fs"></param>
-        /// <param name="tyle"></param>
+        /// <param name="type"></param>
         /// <param name="firstRowToColumn"></param>
         /// <returns></returns>
-        public static DataSet ExcelToDataTableFromStream(Stream fs, ExcelType tyle, bool firstRowToColumn)
+        public static DataSet ExcelToDataTableFromStream(Stream fs, ExcelType type, bool firstRowToColumn)
         {
             IWorkbook workbook = null;
             try
             {
-                if (tyle == ExcelType.Excel2007) // 2007+
+                if (type == ExcelType.Excel2007) // 2007+
                     workbook = new XSSFWorkbook(fs);
-                else if (tyle == ExcelType.Excel2003) // 2003
+                else if (type == ExcelType.Excel2003) // 2003
                     workbook = new HSSFWorkbook(fs);
                 var ds = new DataSet();
                 for (var i = 0; null != workbook && i < workbook.NumberOfSheets; i++)
@@ -450,7 +450,22 @@ namespace Sharewinfo.Util
                                     }
                                     else
                                     {
-                                        var v = cell.ToString();
+                                        var v = "";
+                                        if (cell.CellType == CellType.Numeric)
+                                        {
+                                            if (DateUtil.IsCellDateFormatted(cell))
+                                            {
+                                                v = cell.DateCellValue.ToString();
+                                            }
+                                            else
+                                            {
+                                                v = cell.NumericCellValue.ToString();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            v = cell.ToString();
+                                        }
                                         dr[rn] = v;
                                         haveCellIsNotNull = haveCellIsNotNull || v.Length > 0;
                                     }
