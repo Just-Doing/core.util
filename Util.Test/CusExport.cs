@@ -96,6 +96,12 @@ namespace Unit
             }
             return startRowIndex + dt.Rows.Count + 1;
         }
+
+        public override int RenderHeaderRow(DataTable dt, List<ExcelColumn> columnList, ISheet sheet, XSSFWorkbook workbook, ref int rowIndex, ref int lastRowIndex, int startCellIndex)
+        {
+            var index = dataSet.Tables.IndexOf(dt);
+            return base.RenderHeaderRow(dt, columnList, sheet, workbook, ref rowIndex, ref lastRowIndex, startCellIndex);
+        }
     }
 
     public class Export

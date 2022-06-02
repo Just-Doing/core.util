@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Util.Test
 {
-    class TestThreadLock
+    public class TestThreadLock
     {
 
         [Fact]

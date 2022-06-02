@@ -47,6 +47,7 @@ namespace Sharewinfo.Util
     }
     public class ExcelUtils
     {
+        public static DataSet dataSet { get; set; }
         /// <summary>
         /// 根据datatable返回文件流
         /// </summary>
@@ -54,6 +55,7 @@ namespace Sharewinfo.Util
         /// <returns></returns>
         public static MemoryStream GetStreamByData(DataSet ds)
         {
+            dataSet = ds;
             try
             {
                 IWorkbook workbook = workbook = new XSSFWorkbook();
@@ -98,6 +100,7 @@ namespace Sharewinfo.Util
         /// <returns></returns>
         public MemoryStream GetStreamByData(DataSet ds, Dictionary<string, List<ExcelColumn>> columns)
         {
+            dataSet = ds;
             var workbook = new XSSFWorkbook();
             ICellStyle style = workbook.CreateCellStyle();//创建样式对象
             style.VerticalAlignment = VerticalAlignment.Center;
@@ -117,7 +120,7 @@ namespace Sharewinfo.Util
                 if (workbook != null)
                 {
                     ISheet sheet = workbook.GetSheet(dt.TableName) ?? workbook.CreateSheet(dt.TableName);
-                    int bodyStartIndex = RenaderHeader(sheet, columnList, workbook, 0);
+                    int bodyStartIndex = RenaderHeader(dt, sheet, columnList, workbook, 0);
                     RenderBodyData(dt, sheet, columnList, workbook, style, bodyStartIndex);
                 }
 
@@ -127,17 +130,12 @@ namespace Sharewinfo.Util
             return ms;
         }
 
-        public void SetHeaderStyle(IWorkbook workbook, ICell cell)
+        public virtual void SetHeaderStyle(ISheet sheet, XSSFWorkbook workbook,int cellIndex, int headerStartRowIndex, int lastRowIndex)
         {
-            ICellStyle style = workbook.CreateCellStyle();//创建样式对象
-            style.Alignment = HorizontalAlignment.Center;
-            style.VerticalAlignment = VerticalAlignment.Center;
-            IFont font = workbook.CreateFont(); //创建一个字体样式对象
-            font.FontHeight = 20;
-            font.FontName = "Arial"; //和excel里面的字体对应
-            font.IsBold = true;//字体加粗
-            style.SetFont(font); //将字体样式赋给样式对象
-            cell.CellStyle = style; //把样式赋给单元格
+            for (var i = headerStartRowIndex; i <= lastRowIndex; i++)
+            {
+                SetCellBack(sheet, workbook, i, cellIndex, true);// 把所有的表头设置 边框
+            }
         }
         public void SetBodyStyle(IWorkbook workbook, ICell cell, ExcelColumn column, ICellStyle style, ICellStyle PrevRowStyle)
         {
@@ -165,18 +163,17 @@ namespace Sharewinfo.Util
         /// <param name="workbook"></param>
         /// <param name="notices"></param>
         /// <param name="rowIndex"></param>
+        /// <param name="dt"></param>
         /// <returns></returns>
-        public int RenaderHeader(ISheet sheet, List<ExcelColumn> columnList, XSSFWorkbook workbook, int rowIndex)
+        public int RenaderHeader(DataTable dt,ISheet sheet, List<ExcelColumn> columnList, XSSFWorkbook workbook, int rowIndex)
         {
             var lastRowIndex = rowIndex;
             var headerStartRowIndex = rowIndex ;// 如果有说明文本 则文本下会多一行空白、如果没有得去掉这空白行
-            var cellIndex = RenderHeaderRow(columnList, sheet, workbook, ref rowIndex, ref lastRowIndex, 0);
+            var cellIndex = RenderHeaderRow(dt, columnList, sheet, workbook, ref rowIndex, ref lastRowIndex, 0);
 
-           
-            for (var i = headerStartRowIndex; i <= lastRowIndex; i++)
-            {
-                SetCellBack(sheet, workbook, i, cellIndex, true);// 把所有的表头设置 边框
-            }
+            SetHeaderStyle(sheet, workbook, cellIndex, headerStartRowIndex, lastRowIndex);
+
+
             return lastRowIndex;
         }
         /// <summary>
@@ -188,7 +185,7 @@ namespace Sharewinfo.Util
         /// <param name="rowIndex">行号</param>
         /// <param name="startCellIndex">开始 列号</param>
         /// <returns></returns>
-        public virtual int RenderHeaderRow(List<ExcelColumn> columnList, ISheet sheet, XSSFWorkbook workbook, ref int rowIndex, ref int lastRowIndex, int startCellIndex)
+        public virtual int RenderHeaderRow(DataTable dt, List<ExcelColumn> columnList, ISheet sheet, XSSFWorkbook workbook, ref int rowIndex, ref int lastRowIndex, int startCellIndex)
         {
             var childRow = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
             var cellIndex = startCellIndex; // 开始的列号
@@ -205,7 +202,7 @@ namespace Sharewinfo.Util
                     rowIndex += 1;
                     lastRowIndex = rowIndex > lastRowIndex ? rowIndex : lastRowIndex;// 记录最深的层级
                     var orgCellIndex = cellIndex;
-                    cellIndex = RenderHeaderRow(children, sheet, workbook, ref rowIndex, ref lastRowIndex, cellIndex);
+                    cellIndex = RenderHeaderRow(dt, children, sheet, workbook, ref rowIndex, ref lastRowIndex, cellIndex);
                     sheet.AddMergedRegion(new CellRangeAddress(rowIndex - 1, rowIndex - 1, orgCellIndex, cellIndex - 1));
                     rowIndex -= 1;
                 }
@@ -256,7 +253,7 @@ namespace Sharewinfo.Util
             {
                 var noticeRow = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
                 var noticeCell = noticeRow.GetCell(j) ?? noticeRow.CreateCell(j);
-                noticeCell.CellStyle = noticeStyle; //把样式赋给单元格
+                noticeCell.CellStyle = noticeStyle; //单元格样式
             }
         }
         /// <summary>

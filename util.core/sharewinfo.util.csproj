@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.1.5</Version>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Version>1.1.8</Version>
 	 <!--<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	 <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <Authors>NicolYang</Authors>
