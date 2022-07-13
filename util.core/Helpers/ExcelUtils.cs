@@ -103,6 +103,36 @@ namespace Sharewinfo.Util
                 throw new Exception(ex.Message);
             }
         }
+        private void SetStyleToDic(XSSFWorkbook workbook, Dictionary<string, ICellStyle> dicStyle, List<ExcelColumn> columns, ICellStyle defaultStyle)
+        {
+            foreach (var col in columns)
+            {
+                ICellStyle childColumnCellType = workbook.CreateCellStyle();
+                childColumnCellType.CloneStyleFrom(defaultStyle);
+                dicStyle[col.FieldName] = childColumnCellType;
+                if (col.Children.Count > 0) {
+                    SetStyleToDic(workbook, dicStyle, col.Children, defaultStyle);
+                }
+            }
+        }
+        /// <summary>
+        /// 生产复用 cellStyle workbook.CreateCellStyle 只能创建6400 次 ，  每一列一个style 对象
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        private Dictionary<string, Dictionary<string, ICellStyle>> GenerateColumnStyle(XSSFWorkbook workbook, Dictionary<string, List<ExcelColumn>> dicColumns, ICellStyle defaultStyle)
+        {
+            var dicColumnStyle = new Dictionary<string, Dictionary<string, ICellStyle>>();
+            foreach (var key in dicColumns.Keys) { 
+                var columns = dicColumns[key];
+                var columnStyleList = new Dictionary<string, ICellStyle>();
+                // 递归生成所有列的style 集合
+                SetStyleToDic(workbook, columnStyleList, columns, defaultStyle);
+                dicColumnStyle[key] = columnStyleList;
+            }
+            return dicColumnStyle;
+        }
+
         /// <summary>
         /// 根据datatable返回文件流
         /// </summary>
@@ -112,17 +142,19 @@ namespace Sharewinfo.Util
         {
             dataSet = ds;
             var workbook = new XSSFWorkbook();
-            ICellStyle style = workbook.CreateCellStyle();//创建样式对象
-            style.VerticalAlignment = VerticalAlignment.Center;
-            style.BorderLeft = BorderStyle.Thin;
-            style.BorderRight = BorderStyle.Thin;
-            style.BorderTop = BorderStyle.Thin;
-            style.BorderBottom = BorderStyle.Thin;
-            style.BottomBorderColor = HSSFColor.Grey50Percent.Index;
-            style.TopBorderColor = HSSFColor.Grey50Percent.Index;
-            style.LeftBorderColor = HSSFColor.Grey50Percent.Index;
-            style.RightBorderColor = HSSFColor.Grey50Percent.Index;
-           
+
+            ICellStyle defaultStyle = workbook.CreateCellStyle();//创建样式对象
+            defaultStyle.VerticalAlignment = VerticalAlignment.Center;
+            defaultStyle.BorderLeft = BorderStyle.Thin;
+            defaultStyle.BorderRight = BorderStyle.Thin;
+            defaultStyle.BorderTop = BorderStyle.Thin;
+            defaultStyle.BorderBottom = BorderStyle.Thin;
+            defaultStyle.BottomBorderColor = HSSFColor.Grey50Percent.Index;
+            defaultStyle.TopBorderColor = HSSFColor.Grey50Percent.Index;
+            defaultStyle.LeftBorderColor = HSSFColor.Grey50Percent.Index;
+            defaultStyle.RightBorderColor = HSSFColor.Grey50Percent.Index;
+            var columnStyle = GenerateColumnStyle(workbook, columns, defaultStyle);
+
             MemoryStream ms = new MemoryStream();
             foreach (DataTable dt in ds.Tables)
             {
@@ -131,7 +163,7 @@ namespace Sharewinfo.Util
                 {
                     ISheet sheet = workbook.GetSheet(dt.TableName) ?? workbook.CreateSheet(dt.TableName);
                     int bodyStartIndex = RenaderHeader(dt, sheet, columnList, workbook, 0);
-                    RenderBodyData(dt, sheet, columnList, workbook, style, bodyStartIndex);
+                    RenderBodyData(dt, sheet, columnList, workbook, columnStyle[dt.TableName], bodyStartIndex);
                 }
 
             }
@@ -139,7 +171,57 @@ namespace Sharewinfo.Util
             workbook.Write(ms);
             return ms;
         }
+        /// <summary>
+        /// 该方法 拿着给的参数直接写数据
+        /// </summary>
+        /// <param name="dt">数据</param>
+        /// <param name="sheet"></param>
+        /// <param name="columnList">所有 列</param>
+        /// <param name="workbook"></param>
+        /// <param name="style">单元格 格式、 也可以自定义</param>
+        /// <param name="startRowIndex">从这个行号 开始写数据</param>
+        public virtual int RenderBodyData(DataTable dt, ISheet sheet, List<ExcelColumn> columnList, XSSFWorkbook workbook,Dictionary<string, ICellStyle> columnStyle, int startRowIndex)
+        {
+            for (var i = 0; i < dt.Rows.Count; ++i)//写数据
+            {
+                var dataRow = dt.Rows[i];
+                var row = sheet.CreateRow(i + startRowIndex + 1);
+                var cellIndex = 0;
+                RenderColumnData(sheet, dataRow, row, columnList, workbook, columnStyle, ref cellIndex);
+                row.Height = 17 * 20;
+            }
+            return startRowIndex + dt.Rows.Count + 1;
+        }
 
+        public void RenderColumnData(ISheet sheet, DataRow dataRow, IRow row, List<ExcelColumn> columnList, XSSFWorkbook workbook, Dictionary<string, ICellStyle> columnStyle, ref int cellIndex)
+        {
+            for (var j = 0; j < columnList.Count; ++j)
+            {
+                ICellStyle cellType = columnStyle[columnList[j].FieldName];
+                var column = columnList[j];
+                if (null != column.Children && column.Children.Count > 0)
+                {
+                    RenderColumnData(sheet, dataRow, row, column.Children, workbook, columnStyle, ref cellIndex);
+                }
+                else
+                {
+                    var cell = row.CreateCell(cellIndex);
+                    var cellValue = dataRow[column.FieldName].ToString().Replace("\\r\\n", "\r\n");
+                    SetCellValue(cell, cellValue, column);
+                    if (!string.IsNullOrEmpty(column.Format))
+                    {
+                        var dataformat = workbook.CreateDataFormat();
+                        cellType.DataFormat = dataformat.GetFormat(column.Format);
+                    }
+                    else
+                    {
+                        cellType.DataFormat = 0;
+                    }
+                    cell.CellStyle = cellType; 
+                    cellIndex += 1;
+                }
+            }
+        }
         public virtual void SetHeaderStyle(ISheet sheet, XSSFWorkbook workbook,int cellIndex, int headerStartRowIndex, int lastRowIndex)
         {
             for (var i = headerStartRowIndex; i <= lastRowIndex; i++)
@@ -147,19 +229,7 @@ namespace Sharewinfo.Util
                 SetCellBack(sheet, workbook, i, cellIndex, true);// 把所有的表头设置 边框
             }
         }
-        public void SetBodyStyle(IWorkbook workbook, ICell cell, ExcelColumn column, ICellStyle style, ICellStyle PrevRowStyle)
-        {
-            if (PrevRowStyle == null)
-            {
-                var cellStyle = workbook.CreateCellStyle();
-                cellStyle.CloneStyleFrom(style); //把样式赋给单元格
-                cell.CellStyle = cellStyle;
-            }
-            else
-            {
-                cell.CellStyle = PrevRowStyle;
-            }
-        }
+   
         /// <summary>
         /// 该方法 需要返回 当前行号
         /// </summary>
@@ -261,88 +331,8 @@ namespace Sharewinfo.Util
                 noticeCell.CellStyle = noticeStyle; //单元格样式
             }
         }
-        /// <summary>
-        /// 该方法 拿着给的参数直接写数据
-        /// </summary>
-        /// <param name="dt">数据</param>
-        /// <param name="sheet"></param>
-        /// <param name="columnList">所有 列</param>
-        /// <param name="workbook"></param>
-        /// <param name="style">单元格 格式、 也可以自定义</param>
-        /// <param name="startRowIndex">从这个行号 开始写数据</param>
-        public virtual int RenderBodyData(DataTable dt, ISheet sheet, List<ExcelColumn> columnList, XSSFWorkbook workbook, ICellStyle style, int startRowIndex)
-        {
-            var allCellStyle = new ICellStyle[columnList.Count];
-            for (var i = 0; i < dt.Rows.Count; ++i)//写数据
-            {
-                var dataRow = dt.Rows[i];
-                var row = sheet.CreateRow(i + startRowIndex + 1);
-                var cellIndex = 0;
-                for (var j = 0; j < columnList.Count; ++j)
-                {
-                    ICellStyle prevStyle = null;
-                    if (i > 0 && allCellStyle[j] == null)
-                    {
-                        var prevRow = sheet.GetRow(i + startRowIndex);
-                        if (null != prevRow)
-                        {
-                            var prevRowCell = prevRow.GetCell(cellIndex);
-                            if (null != prevRowCell)
-                            {
-                                prevStyle = prevRowCell.CellStyle;
-                            }
-                        }
-                        allCellStyle[j] = prevStyle;
-                    }
-                    var column = columnList[j];
-                    if (null != column.Children && column.Children.Count > 0)
-                    {
-                        RenderChildColumn(sheet, dataRow, row, column.Children, workbook, style, ref cellIndex, allCellStyle[j]);
-                    }
-                    else
-                    {
-                        var cell = row.CreateCell(cellIndex);
-                        var cellValue = dataRow[column.FieldName].ToString().Replace("\\r\\n", "\r\n");
-                        SetCellValue(cell, cellValue, column);
-                        if (!string.IsNullOrEmpty(column.Format))
-                        {
-                            var dataformat = workbook.CreateDataFormat();
-                            style.DataFormat = dataformat.GetFormat(column.Format);
-                        }
-                        SetBodyStyle(workbook, cell, column, style, allCellStyle[j]);
-                        cellIndex += 1;
-                    }
-                }
-                row.Height = 17 * 20;
-            }
-            return startRowIndex + dt.Rows.Count + 1;
-        }
+       
 
-        public void RenderChildColumn(ISheet sheet, DataRow dataRow, IRow row, List<ExcelColumn> columnList, XSSFWorkbook workbook, ICellStyle style, ref int cellIndex, ICellStyle PrevRowStyle)
-        {
-            for (var j = 0; j < columnList.Count; ++j)
-            {
-                var column = columnList[j];
-
-                if (null != column.Children && column.Children.Count > 0)
-                {
-                    RenderChildColumn(sheet, dataRow, row, column.Children, workbook, style, ref cellIndex, PrevRowStyle);
-                }
-                else
-                {
-                    var cell = row.CreateCell(cellIndex);
-                    var cellValue = dataRow[column.FieldName].ToString().Replace("\\r\\n", "\r\n");
-                    SetCellValue(cell, cellValue, column);
-                    if (!string.IsNullOrEmpty(column.Format))
-                    {
-                        var dataformat = workbook.CreateDataFormat();
-                        style.DataFormat = dataformat.GetFormat(column.Format);
-                    }
-                    SetBodyStyle(workbook, cell, column, style, PrevRowStyle);
-                    cellIndex += 1;
-                }
-            }
-        }
         protected void SetCellValue(ICell cell, string value, ExcelColumn column)
         {
             switch (column.Type) {
