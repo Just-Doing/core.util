@@ -41,7 +41,7 @@ namespace Unit
                     var column = columnList[j];
                     if (null != column.Children && column.Children.Count > 0)
                     {
-                        SetCellValue(sheet, dataRow, row, column.Children, workbook, style, ref cellIndex, allCellStyle[j]);
+                        RenderChildColumn(sheet, dataRow, row, column.Children, workbook, style, ref cellIndex, allCellStyle[j]);
                     }
                     else
                     {
@@ -70,22 +70,7 @@ namespace Unit
                         else {
                             var cell = row.CreateCell(cellIndex);
                             var cellValue = dataRow[column.FieldName].ToString().Replace("\\r\\n", "\r\n");
-                            if (column.Type == "2")
-                            {
-                                double v = 0;
-                                if (double.TryParse(cellValue, out v))
-                                {
-                                    cell.SetCellValue(v);
-                                }
-                                else
-                                {
-                                    cell.SetCellValue(cellValue);
-                                }
-                            }
-                            else
-                            {
-                                cell.SetCellValue(cellValue);
-                            }
+                            SetCellValue(cell, cellValue, column);
                             SetBodyStyle(workbook, cell, column, style, allCellStyle[j]);
                             cellIndex += 1;
                         }
@@ -115,12 +100,16 @@ namespace Unit
             var dt = new DataTable("table1");
             dt.Columns.Add(new DataColumn("name"));
             dt.Columns.Add(new DataColumn("age"));
+            dt.Columns.Add(new DataColumn("date"));
+            dt.Columns.Add(new DataColumn("datetime"));
             var dr = dt.NewRow();
             dr["name"] = "nicol";
             dr["age"] = 18;
             var dr1 = dt.NewRow();
             dr1["name"] = "nicol11111111111";
             dr1["age"] = 20;
+            dr1["date"] = "2022-01-01";
+            dr1["datetime"] = "2022-01-01 12:12:12";
             dt.Rows.Add(dr);
             dt.Rows.Add(dr1);
             ds.Tables.Add(dt);
@@ -140,11 +129,13 @@ namespace Unit
             Dictionary<string, List<ExcelColumn>> dc = new Dictionary<string, List<ExcelColumn>>();
             dc.Add("table1", new List<ExcelColumn>() {
                 new ExcelColumn("名称", "name", 300),
-                new ExcelColumn("年龄", "age", 100)
+                new ExcelColumn("年龄", "age", 100),
+                new ExcelColumn("日期", "date", 100,ColumnType.Date, "yyyy-MM-dd"),
+                new ExcelColumn("日期时间", "datetime", 100,ColumnType.DateTime, "yyyy-MM-dd HH:mm:ss")
             });
             dc.Add("table2", new List<ExcelColumn>() {
                 new ExcelColumn("名称222", "name2", 300),
-                new ExcelColumn("年龄222", "age2", 100)
+                new ExcelColumn("年龄222", "age2", 100, ColumnType.Number)
             });
             var st = new ExcelUtils().GetStreamByData(ds, dc);
             using (FileStream fs = new FileStream("d:/aaa.xlsx", FileMode.Create))

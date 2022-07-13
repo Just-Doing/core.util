@@ -17,7 +17,7 @@ namespace Sharewinfo.Util
         private int _width;
 
         public string FieldName { get; set; }
-        public string Type { get; set; } // 数字   时间
+        public ColumnType Type { get; set; } // 数字   时间
         public string Format { get; set; } // 格式化
         public List<ExcelColumn> Children { get; set; }=new List<ExcelColumn>();
         public int Width
@@ -30,12 +30,14 @@ namespace Sharewinfo.Util
         }
         public int GroupCount { get; set; }
         public int RenderIndex { get; set; }// 用于 同一个sheet 2个表头 区分层次
-        public ExcelColumn(string columnName, string filedName, int Width)
+        public ExcelColumn(string columnName, string filedName, int Width, ColumnType type = ColumnType.String, string formate="")
         {
             ColumnName = columnName;
             FiledName = filedName;
             FieldName = filedName;
             _width = Width;
+            Type = type;
+            Format = formate;
         }
 
         public string ColumnName { get; set; }
@@ -44,6 +46,14 @@ namespace Sharewinfo.Util
     public enum ExcelType { 
         Excel2003=0,
         Excel2007 = 1
+    }
+
+    public enum ColumnType
+    {
+        String = 0,
+        Number = 1,
+        Date = 2,
+        DateTime = 3
     }
     public class ExcelUtils
     {
@@ -143,11 +153,6 @@ namespace Sharewinfo.Util
             {
                 var cellStyle = workbook.CreateCellStyle();
                 cellStyle.CloneStyleFrom(style); //把样式赋给单元格
-                var dataformat = workbook.CreateDataFormat();
-                if (column.Type != "1" && !string.IsNullOrEmpty(column.Format))
-                {
-                    cellStyle.DataFormat = dataformat.GetFormat(column.Format);
-                }
                 cell.CellStyle = cellStyle;
             }
             else
@@ -292,27 +297,17 @@ namespace Sharewinfo.Util
                     var column = columnList[j];
                     if (null != column.Children && column.Children.Count > 0)
                     {
-                        SetCellValue(sheet, dataRow, row, column.Children, workbook, style, ref cellIndex, allCellStyle[j]);
+                        RenderChildColumn(sheet, dataRow, row, column.Children, workbook, style, ref cellIndex, allCellStyle[j]);
                     }
                     else
                     {
                         var cell = row.CreateCell(cellIndex);
                         var cellValue = dataRow[column.FieldName].ToString().Replace("\\r\\n", "\r\n");
-                        if (column.Type == "2")
+                        SetCellValue(cell, cellValue, column);
+                        if (!string.IsNullOrEmpty(column.Format))
                         {
-                            double v = 0;
-                            if (double.TryParse(cellValue, out v))
-                            {
-                                cell.SetCellValue(v);
-                            }
-                            else
-                            {
-                                cell.SetCellValue(cellValue);
-                            }
-                        }
-                        else
-                        {
-                            cell.SetCellValue(cellValue);
+                            var dataformat = workbook.CreateDataFormat();
+                            style.DataFormat = dataformat.GetFormat(column.Format);
                         }
                         SetBodyStyle(workbook, cell, column, style, allCellStyle[j]);
                         cellIndex += 1;
@@ -323,7 +318,7 @@ namespace Sharewinfo.Util
             return startRowIndex + dt.Rows.Count + 1;
         }
 
-        public virtual void SetCellValue(ISheet sheet, DataRow dataRow, IRow row, List<ExcelColumn> columnList, XSSFWorkbook workbook, ICellStyle style, ref int cellIndex, ICellStyle PrevRowStyle)
+        public void RenderChildColumn(ISheet sheet, DataRow dataRow, IRow row, List<ExcelColumn> columnList, XSSFWorkbook workbook, ICellStyle style, ref int cellIndex, ICellStyle PrevRowStyle)
         {
             for (var j = 0; j < columnList.Count; ++j)
             {
@@ -331,34 +326,65 @@ namespace Sharewinfo.Util
 
                 if (null != column.Children && column.Children.Count > 0)
                 {
-                    SetCellValue(sheet, dataRow, row, column.Children, workbook, style, ref cellIndex, PrevRowStyle);
+                    RenderChildColumn(sheet, dataRow, row, column.Children, workbook, style, ref cellIndex, PrevRowStyle);
                 }
                 else
                 {
                     var cell = row.CreateCell(cellIndex);
                     var cellValue = dataRow[column.FieldName].ToString().Replace("\\r\\n", "\r\n");
-                    if (columnList[j].Type == "2")
+                    SetCellValue(cell, cellValue, column);
+                    if (!string.IsNullOrEmpty(column.Format))
                     {
-                        double v = 0;
-                        if (double.TryParse(cellValue, out v))
-                        {
-                            cell.SetCellValue(v);
-                        }
-                        else
-                        {
-                            cell.SetCellValue(cellValue);
-                        }
-                        //cell.SetCellValue(Convert.ToDouble(cellValue));
-                    }
-                    else
-                    {
-                        cell.SetCellValue(cellValue);
+                        var dataformat = workbook.CreateDataFormat();
+                        style.DataFormat = dataformat.GetFormat(column.Format);
                     }
                     SetBodyStyle(workbook, cell, column, style, PrevRowStyle);
                     cellIndex += 1;
                 }
             }
         }
+        protected void SetCellValue(ICell cell, string value, ExcelColumn column)
+        {
+            switch (column.Type) {
+                case ColumnType.Number:
+                    double dv;
+                    if (double.TryParse(value, out dv))
+                    {
+                        cell.SetCellValue(dv);
+                    }
+                    else
+                    {
+                        cell.SetCellValue(value);
+                    }
+                    break;
+                case ColumnType.Date:
+                    DateTime dt;
+                    if (DateTime.TryParseExact(value,"yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AdjustToUniversal, out dt))
+                    {
+                        cell.SetCellValue(dt);
+                    }
+                    else
+                    {
+                        cell.SetCellValue(value);
+                    }
+                    break;
+                case ColumnType.DateTime:
+                    DateTime dtt;
+                    if (DateTime.TryParseExact(value, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AdjustToUniversal, out dtt))
+                    {
+                        cell.SetCellValue(dtt);
+                    }
+                    else
+                    {
+                        cell.SetCellValue(value);
+                    }
+                    break;
+                default:
+                    cell.SetCellValue(value);break;
+            }
+           
+        }
+
         /// <summary>
         /// 将excel中的数据导入到Dataset中
         /// </summary>
