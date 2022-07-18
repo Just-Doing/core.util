@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Util.Webs.Clients {
+namespace Sharewinfo.Util.Webs.Clients {
     /// <summary>
     /// 内容类型
     /// </summary>

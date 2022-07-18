@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace Util.Webs.Clients {
+namespace Sharewinfo.Util.Webs.Clients {
     /// <summary>
     /// Web客户端
     /// </summary>

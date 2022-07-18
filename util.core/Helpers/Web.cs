@@ -127,16 +127,16 @@ namespace Util.Core.Helpers {
         /// <summary>
         /// Web客户端，用于发送Http请求
         /// </summary>
-        public static Util.Webs.Clients.WebClient Client() {
-            return new Util.Webs.Clients.WebClient();
+        public static Sharewinfo.Util.Webs.Clients.WebClient Client() {
+            return new Sharewinfo.Util.Webs.Clients.WebClient();
         }
 
         /// <summary>
         /// Web客户端，用于发送Http请求
         /// </summary>
         /// <typeparam name="TResult">返回结果类型</typeparam>
-        public static Util.Webs.Clients.WebClient<TResult> Client<TResult>() where TResult : class {
-            return new Util.Webs.Clients.WebClient<TResult>();
+        public static Sharewinfo.Util.Webs.Clients.WebClient<TResult> Client<TResult>() where TResult : class {
+            return new Sharewinfo.Util.Webs.Clients.WebClient<TResult>();
         }
 
         #endregion

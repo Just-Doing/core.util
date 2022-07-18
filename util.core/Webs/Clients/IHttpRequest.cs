@@ -2,7 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Util.Webs.Clients {
+namespace Sharewinfo.Util.Webs.Clients {
     /// <summary>
     /// Http请求
     /// </summary>

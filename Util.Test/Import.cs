@@ -14,7 +14,7 @@ using System.Text;
 using util.core.Helpers;
 using Util.Core.Helpers;
 using Util.Dependency;
-using Util.Webs.Clients;
+using Sharewinfo.Util.Webs.Clients;
 using Xunit;
 
 namespace Util.Test
