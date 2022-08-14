@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rsa_javascript_csharp
+namespace Util.Core.Rsa_Javascript_Csharp
 {
     /// <summary>
     /// AJax提交参数加密帮助类

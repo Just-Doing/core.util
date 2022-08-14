@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace util.core.rsa_java_csharp
+namespace Util.Core.Rsa_Java_Csharp
 {
     public class Rsa_CSharp
     {
