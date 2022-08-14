@@ -1,6 +1,6 @@
 ﻿using Autofac.Core;
 
-namespace Util.Dependency {
+namespace Util.Core.Dependency {
     /// <summary>
     /// 依赖配置
     /// </summary>

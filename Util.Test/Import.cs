@@ -2,7 +2,6 @@
 using Autofac.Core;
 using core.util.IocTest;
 using Newtonsoft.Json;
-using Sharewinfo.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,11 +10,11 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using util.core.Helpers;
 using Util.Core.Helpers;
-using Util.Dependency;
-using Sharewinfo.Util.Webs.Clients;
+using Util.Core.Dependency;
+using Util.Core.Webs.Clients;
 using Xunit;
+using Util.Core;
 
 namespace Util.Test
 {

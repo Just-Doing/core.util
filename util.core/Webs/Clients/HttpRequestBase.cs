@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Util.Core;
 using Util.Core.Helpers;
 
-namespace Sharewinfo.Util.Webs.Clients {
+namespace Util.Core.Webs.Clients {
     /// <summary>
     /// Http请求
     /// </summary>

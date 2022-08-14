@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Util.Dependency {
+namespace Util.Core.Dependency {
     /// <summary>
     /// 依赖注册器
     /// </summary>

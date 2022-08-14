@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace sharewinfo.util.Helpers.Domain
+namespace Util.Core.Helpers.Domain
 {
     public class LDAPUtil
     {

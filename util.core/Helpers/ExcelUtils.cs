@@ -10,7 +10,7 @@ using System.Data;
 using System.IO;
 
 
-namespace Sharewinfo.Util
+namespace Util.Core
 {
     public class ExcelColumn
     {

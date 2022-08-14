@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace sharewinfo.util.Helpers
+namespace Util.Core.Helpers
 {
     class StreamHelper
     {

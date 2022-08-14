@@ -1,4 +1,4 @@
-﻿using Util.Dependency;
+﻿using Util.Core.Dependency;
 
 namespace Util.Contexts {
     /// <summary>

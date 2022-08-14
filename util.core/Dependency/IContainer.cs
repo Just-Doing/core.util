@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Util.Dependency {
+namespace Util.Core.Dependency {
     /// <summary>
     /// 容器
     /// </summary>

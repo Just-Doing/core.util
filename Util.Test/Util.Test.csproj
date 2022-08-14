@@ -15,11 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\util.core\sharewinfo.util.csproj" />
+    <Folder Include="IocTest\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="IocTest\" />
+    <ProjectReference Include="..\util.core\sharewinfo.util.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Builder;
 
-namespace Util.Dependency {
+namespace Util.Core.Dependency {
     /// <summary>
     /// Autofac扩展
     /// </summary>

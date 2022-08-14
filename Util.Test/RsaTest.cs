@@ -5,7 +5,7 @@ using core.util.IocTest;
 using System;
 using util.core.rsa_java_csharp;
 using Util.Core.Helpers;
-using Util.Dependency;
+using Util.Core.Dependency;
 using Xunit;
 
 namespace Util.Test

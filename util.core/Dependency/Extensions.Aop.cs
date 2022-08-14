@@ -8,7 +8,7 @@ using Autofac;
 using Util.Core;
 using Util.Core.Helpers;
 
-namespace Util.Dependency {
+namespace Util.Core.Dependency {
     /// <summary>
     /// AspectCore扩展
     /// </summary>

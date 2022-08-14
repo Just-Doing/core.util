@@ -8,9 +8,8 @@ using core.util.IocTest;
 using core.util.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using util.core.Helpers;
 using Util.Core.Helpers;
-using Util.Dependency;
+using Util.Core.Dependency;
 using WeChatMVC.Common;
 
 namespace core.util.Controllers

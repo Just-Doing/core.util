@@ -6,7 +6,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Util.Core.Helpers;
 
-namespace Util.Dependency {
+namespace Util.Core.Dependency {
     /// <summary>
     /// Autofac对象容器
     /// </summary>

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Util.Core.Helpers;
-using Util.Dependency;
+using Util.Core.Dependency;
 
 namespace core.util
 {
