@@ -143,5 +143,44 @@ namespace Util.Core.Helpers {
             var value = System.Text.Encoding.UTF8.GetString(b);
             return value;
         }
+
+        /// <summary>
+        /// 获取两字符串的编辑距离,矩阵
+        /// </summary>
+        /// <param name="str1"></param>
+        /// <param name="str2"></param>
+        /// <returns></returns>
+        public static int[,] GetLD(string str1, string str2)
+        {
+            int leng1 = str1.Length;
+            int leng2 = str2.Length;
+            int[,] lens = new int[leng1 + 1, leng2 + 1];
+            //首先初始化数组的第一行和第一列
+            for (int i = 0; i <= leng1; i++)
+            {
+                lens[i, 0] = i;
+            }
+            for (int i = 0; i <= leng2; i++)
+            {
+                lens[0,i] = i;
+            }
+            //计算数组其他位置的大小
+            for (int i = 1; i <= leng1; i++)
+            {
+                for (int j = 1; j <= leng2; j++)
+                {
+                    if (str1[i - 1] == str2[j - 1])
+                    {
+                        lens[i,j] = lens[i - 1, j - 1];
+                    }
+                    else
+                    {
+                        int tmp = Math.Min(lens[i, j - 1], lens[i - 1, j]);
+                        lens[i,j] = Math.Min(tmp, lens[i - 1, j - 1]) + 1;
+                    }
+                }
+            }
+            return lens;
+        }
     }
 }
