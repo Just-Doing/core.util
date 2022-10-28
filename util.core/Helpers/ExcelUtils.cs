@@ -10,7 +10,7 @@ using System.Data;
 using System.IO;
 
 
-namespace Util.Core
+namespace Util.Core.Helpers
 {
     public class ExcelColumn
     {

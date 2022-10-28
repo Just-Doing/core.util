@@ -1,7 +1,6 @@
 ﻿using CrossSellingApi.Common;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using Util.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Util.Core.Helpers;
 
 namespace Unit
 {
@@ -42,7 +42,7 @@ namespace Unit
                         if (column.FieldName.StartsWith("imgs"))
                         {
                             // 读取图片
-                            var imgInx = Convert.ToInt32(column.FieldName.Replace("imgs", ""));
+                            var imgInx = System.Convert.ToInt32(column.FieldName.Replace("imgs", ""));
                             var imgs = dataRow["imgs"].ToString().Split(";");
                             var img = imgInx >= imgs.Length? "" : imgs[imgInx];
                             if (!string.IsNullOrEmpty(img)) {

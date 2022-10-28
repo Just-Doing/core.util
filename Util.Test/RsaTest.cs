@@ -3,10 +3,10 @@ using Autofac.Core;
 using CMCloud.SaaS;
 using core.util.IocTest;
 using System;
-using util.core.rsa_java_csharp;
 using Util.Core.Helpers;
 using Util.Core.Dependency;
 using Xunit;
+using Util.Core.Rsa_Java_Csharp;
 
 namespace Util.Test
 {
@@ -23,11 +23,23 @@ namespace Util.Test
             Assert.Equal<int>(7, 8);
 
         }
-[Fact]
+        [Fact]
         public void DectryTest1()
         {
             var s = new Rsa_CSharp().EncryptString("test");
             var s1 = new Rsa_CSharp().DecryptString(s);
+            Assert.Equal<int>(7, 8);
+
+        }
+
+        [Fact]
+        public void Test1()
+        {
+
+            //0时区
+            DateTimeOffset dt = DateTimeOffset.Parse("2022-08-12 10:28:00.0000000 +00:00");
+            //根据本地时区转换
+            var localTime = dt.ToLocalTime();
             Assert.Equal<int>(7, 8);
 
         }

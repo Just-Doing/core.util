@@ -15,7 +15,7 @@ namespace sharewinfo.flow.Controller
     public class FlowCoreController: ControllerBase
     {
         [HttpPost("SaveFlow/{flowId}")]
-        public ActionResult<dynamic> SaveLamsPrice(int flowId)
+        public ActionResult<dynamic> SaveFlow(int flowId)
         {
             return Ok(flowId);
         }

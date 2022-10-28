@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Version>1.2.2</Version>
+    <Version>1.2.3</Version>
 	 <!--<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	 <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <Authors>NicolYang</Authors>
@@ -17,10 +17,13 @@
     <PackageReference Include="AspectCore.Extensions.Autofac" Version="1.1.0" />
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="IdentityModel" Version="3.10.5" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Novell.Directory.Ldap.NETStandard" Version="3.6.0" />
     <PackageReference Include="NPOI" Version="2.5.6" />
+    <PackageReference Include="ServiceStack.Redis" Version="6.4.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.4" />
     <PackageReference Include="System.Management" Version="4.5.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
   </ItemGroup>

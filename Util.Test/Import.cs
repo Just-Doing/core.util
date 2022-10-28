@@ -18,6 +18,14 @@ using Util.Core;
 
 namespace Util.Test
 {
+    public class CalcConfig : Module, IConfig
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<MyClass2>().As<MyClass2>();
+            builder.RegisterType<MyClass>().As<IClass>();
+        }
+    }
     public class TestHelper
     {
         [Fact]
@@ -191,12 +199,5 @@ namespace Util.Test
             }
         }
     }
-    public class CalcConfig: Module, IConfig
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterType<MyClass2>().As<MyClass2>();
-            builder.RegisterType<MyClass>().As<IClass>();
-        }
-    }
+    
 }
